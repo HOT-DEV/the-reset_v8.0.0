@@ -1,0 +1,25 @@
+<div class="ovrelay-content"></div>
+<div class="site-nav__dropdown">
+  {% for childlink in linklists[child_list_handle].links %}
+  {%- comment %}<locksmith:61e1>{% endcomment -%}
+    {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: childlink, subject_parent: linklists[child_list_handle], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+  {%- comment %}</locksmith:61e1>{% endcomment -%}
+  <ul class="text-left">
+    <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+      <a href="{{ childlink.url }}" class="site-nav__dropdown-link {% if linklists[childlink.handle] != blank %} has-child {%- else -%}{%- endif -%}" >{{ childlink.title | escape }}</a>
+      {% if linklists[childlink.handle] != blank %}
+      <ul class="text-left">
+        {% for childchildlink in linklists[childlink.handle].links %}
+        {%- comment %}<locksmith:9b96>{% endcomment -%}
+          {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: childchildlink, subject_parent: linklists[childlink.handle], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+        {%- comment %}</locksmith:9b96>{% endcomment -%}
+        <li{% if childchildlink.active %} class="site-nav--active"{% endif %}>
+          <a href="{{ childchildlink.url }}" class="site-nav__dropdown-link {% if childchildlink.url contains '#' %} disable-link-title {%- else -%}{%- endif -%}">{{ childchildlink.title | escape }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </li>
+  </ul>
+  {% endfor %}
+</div>

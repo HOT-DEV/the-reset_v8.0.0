@@ -1,0 +1,765 @@
+<!-- /templates/product.liquid -->
+
+{% comment %}
+  Get the colors this product is available in
+{% endcomment %}
+
+{% for option in product.options_with_values %}
+  {% if option.name contains 'olor' %}
+    {% for value in option.values %}
+      {% capture colors %}{{ colors }}{{ value }}{% unless forloop.last %},{% endunless %}{% endcapture %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% assign colors = colors | split: ',' %}
+
+<div itemscope itemtype="http://schema.org/Product" id="ProductSection" data-section-id="{{ section.id }}" data-section-type="product-template" data-image-zoom-type="{{ section.settings.zoom_enable }}" data-enable-history-state="true">
+  <div itemscope itemtype="http://schema.org/Product">
+
+    <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+    <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    {% comment %}
+      Used to update the video on load
+    {% endcomment %}
+    {% assign current_variant_color = current_variant.options[0] %}
+
+    <div class="grid product-single">
+      <div class="grid__item large--seven-twelfths medium--seven-twelfths text-left">
+        <div class="product-single__photos">
+          {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+          {% comment %}
+            Display current variant image, or default first
+          {% endcomment %}
+
+          {% comment %}
+            Disabled for sets of variant images
+          {% endcomment %}
+
+          {% comment %}
+          <div class="product-single__photo-wrapper">
+            <img class="product-single__photo lazyload"
+              id="ProductPhotoImg"
+              data-src="{{ featured_image | img_url: 'grande' }}"
+              {% if section.settings.zoom_enable %}data-mfp-src="{{ featured_image | img_url: '1024x1024' }}"{% endif %}
+              alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
+          </div>
+          {% endcomment %}
+
+          {% comment %}
+            Display rest of product images
+          {% endcomment %}
+
+          {% comment %}
+            Add data attribute to each image. Images must be in the orders of the colors
+          {% endcomment %}
+          {% assign index = 0 %}
+          {% assign colors0 = colors.size | minus: 1 %}
+
+          {% for image in product.images %}
+              <div class="product-single__photo-wrapper color__{{ colors[index] }} hidden" data-product-color="{{ colors[index] }}">
+                <img 
+                  src="{{ 'lazy.gif' | asset_url }}"
+                  class="product-single__photo lazyload"
+                  data-src="{{ image.src | img_url: '600x' }}"
+                  {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '2048x' }}"{% endif %}
+                  data-srcset="{{ image.src | img_url: '1200x' }} 1200w, {{ image.src | img_url: '1600x' }} 1600w"
+                  data-sizes="auto"
+                  alt="{{ image.alt | escape }}"
+                  data-image-id="{{ image.id }}">
+              </div>
+              {% comment %}
+                If the index is greater than the number of colors, reset the counter
+              {% endcomment %}
+              {% assign next = colors.size %}
+              {% if index == colors0 %}
+                {% assign index = 0 %}
+              {% else %}
+                {% assign index = index | plus: 1 %}
+              {% endif %}
+
+          {% endfor %}
+
+          {% comment %}
+            Product videos. src, poster and data-product-color set by updateVideos()
+          {% endcomment %}
+          {% if product.metafields.product_video != blank %}
+          <div id="productVideoWrapper" class="product-single__photo-wrapper product-single__video-wrapper" data-product-color=" ">
+            <video id="productVideo" preload="auto" src="" loop muted controls poster=" " onclick="this.paused ? this.play() : this.pause();"></video>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--five-twelfths">
+        <div class="product-single__meta {% unless current_variant.available %}variant-sold-out{% endunless %}">
+          {% if section.settings.product_vendor_enable %}
+            <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
+          {% endif %}
+
+          <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+
+          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            
+            <div class="price_disclaimers">
+              <div class="best-seller">
+                {{ section.settings.best_seller_text }}
+              </div>
+            </div>
+            
+            {% comment %}
+              Optionally show the 'compare at' or original price of the product.
+            {% endcomment %}
+            {% form 'product', product, id: "AddToCartForm", class: "product-single__form" %}
+              <div class="price-wrapper">
+                <span id="ProductPrice"
+                      class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}"
+                      itemprop="price"
+                      content="{{ current_variant.price | divided_by: 100.00 }}">
+                  {{ current_variant.price | money_without_trailing_zeros }}
+                </span>
+                {% if product.compare_at_price_max > product.price %}
+                <span id="PriceA11y" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                <span class="product-single__price--wrapper">
+                  <span id="ComparePrice" class="product-single__price--compare-at">
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                    {{ current_variant.compare_at_price | money_without_trailing_zeros }}
+                    {% endif %}
+                  </span>
+                </span>
+                <span id="ComparePriceA11y" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                {% else %}
+                <span id="PriceA11y" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                {% endif %}
+                <div class="payment-options-container">
+                {{ form | payment_terms }}
+                </div>
+              </div>
+
+              {% comment %}
+              {% if product.tags contains 'show_disclaimer' %}
+                {% if section.settings.disclaimer_copy %}
+                  <span class="disclaimer_copy">{{ section.settings.disclaimer_copy }}</span>
+                {% endif %}
+              {% endif %}
+              {% endcomment %}            
+              <hr class="hr--small">
+
+              {% if product.metafields.accentuate.exclude_disclaimer %}
+
+              {% else %}
+              <div class="price_disclaimers">
+                <div class="above50">
+                  {{ section.settings.above_50_text }}
+                </div>
+                <div class="below50">
+                  {{ section.settings.below_50_text }}
+                </div>
+              </div>
+              {% endif %}
+
+              <style>
+                .price_disclaimers p{
+                  font-size:14px;
+                }
+                {% if section.settings.above_50_color != blank %}
+                .above50 p {
+                  color:{{ section.settings.above_50_color }};
+                }
+                {% endif %}
+                {% if section.settings.below_50_color != blank %}
+                .below50 p {
+                  color:{{ section.settings.below_50_color }};
+                }
+                {% endif %}
+                {% if section.settings.best_seller_color != blank %}
+                .best-seller p {
+                  color:{{ section.settings.best_seller_color }};
+                }
+                {% endif %}
+              </style>
+
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+<!--             <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-single__form" id="AddToCartForm"> -->
+              {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+                {% for option in product.options_with_values %}
+                  <div class="radio-wrapper js product-form__item">
+                    <label class="single-option-radio__label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}"
+                      for="ProductSelect-option-{{ forloop.index0 }}">
+                      {{ option.name }}
+                    </label>
+                    <fieldset class="single-option-radio"
+                      name="{{ option.name }}"
+                      id="ProductSelect-option-{{ forloop.index0 }}">
+                      {% assign option_index = forloop.index %}
+                      {% for value in option.values %}
+                        {% assign variant_label_state = true %}
+                        {% if product.options.size == 1 %}
+                          {% unless product.variants[forloop.index0].available  %}
+                            {% assign variant_label_state = false %}
+                          {% endunless %}
+                        {% endif %}
+                        <input type="radio"
+                          {% if option.selected_value == value %} checked="checked"{% endif %}
+                          {% unless variant_label_state %} disabled="disabled"{% endunless %}
+                          value="{{ value | escape }}"
+                          data-index="option{{ option_index }}"
+                          name="{{ option.name }}"
+                          class="single-option-selector__radio{% unless variant_label_state %} disabled{% endunless %}"
+                          id="ProductSelect-option-{{ option.name }}-{{ value | escape }}">
+                        <label for="ProductSelect-option-{{ option.name }}-{{ value | escape }}" data-handle-value="{{ value | handle }}"  data-value="{{ value | escape }}" {% unless variant_label_state %} class="disabled"{% endunless %}>{{ value | escape }}</label>
+                      {% endfor %}
+                    </fieldset>
+                  </div>
+                {% endfor %}
+              {% endunless %}
+
+              <select name="id" id="ProductSelect" class="product-single__variants no-js">
+                {% for variant in product.variants %}
+                    <option {% if variant == product.selected_or_first_available_variant %}
+                      selected="selected" {% endif %}
+                      data-sku="{{ variant.sku }}"
+                      data-color-name="{{ variant.option1 }}"
+                            data-size-name="{{ variant.option2 | handle }}"
+                      {%- if variant.metafields.fulfillment.shipping_by -%}
+                        data-ships-by="{{ variant.metafields.fulfillment.shipping_by }}"
+                      {%- endif -%}
+                      {%- if variant.metafields.accentuate.best_seller -%}
+                        data-is-best-seller="{{ variant.metafields.accentuate.best_seller }}"
+                        data-best-seller-text='{{ variant.metafields.accentuate.best_seller_message_text }}'
+                        data-best-seller-color="{{ variant.metafields.accentuate.best_seller_text_color }}"    
+                      {%- endif -%}
+                      {%- if variant.metafields.accentuate.make_variant_inactive -%}
+						data-is-variant-inactive="{{ variant.metafields.accentuate.make_variant_inactive }}"
+                      {%- endif -%}
+                      value="{{ variant.id }}"
+                      data-available="{{ variant.available }}">
+                      {{ variant.title }} - {{ variant.price | money_with_currency }}
+                    </option>
+                {% endfor %}
+              </select>
+
+              
+              <div class="product-single__quantity" style="display:none;">
+                <label for="Quantity" class="product-single__quantity-label js-quantity-selector">{{ 'products.product.quantity' | t }}</label>
+                <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
+              </div>
+              
+
+              {% comment %}
+                Check availablity
+              {% endcomment %}
+              {% assign is_available = false %}
+              {% if product.selected_variant.id != nil %}
+                {% if product.selected_variant.available %}
+                  {% assign is_available = true %}
+                {% endif %}
+              {% else %}
+                {% if product.available %}
+                  {% assign is_available = true %}
+                {% endif %}
+              {% endif %}
+
+              <div class="product-single__add-to-cart">
+
+                <button type="submit" name="add" id="AddToCart"
+                  class="btn {% unless is_available %} hidden-OFF disabled{% endunless %}"
+                        {% unless is_available %}disabled{% endunless %}>
+                  <span id="AddToCartText">
+
+                      {% if current_variant.metafields.fulfillment.shipping_by %}
+                        Pre-Order
+                      {% else %}
+                    	{% if is_available %}
+                    		{{ 'products.product.add_to_cart' | t }}
+                    	{% else %}
+                    		Sold Out
+                    	{% endif %}
+                        
+                      {% endif %}
+
+                  </span>
+                </button>
+                
+                <span class="btn btn__bis {% if is_available %} hidden{% endif %}">
+                      <span id="BIS_trigger">Waitlist</span>
+             
+                </span>
+                  
+              </div>
+
+              {% assign show_presale = false %}
+              {% assign presale_css = 'hide'  %}
+
+              {% if current_variant.metafields.fulfillment.shipping_by %}
+                {% assign presale_css = ''  %}
+                {% assign shipping_by = current_variant.metafields.fulfillment.shipping_by %}
+                <input type="hidden" id="shipsByProperty" name="properties[This preorder item is estimated to ship by]" value="{{ shipping_by }}" />
+              {% else %}
+              	<input type="hidden" id="shipsByProperty" name="properties[This preorder item is estimated to ship by]" value="" disabled />
+              {% endif %}
+              
+              {% if is_available == false %}
+              	 {% assign presale_css = 'hide'  %}
+              {% endif %}
+              <div class="pre-sale-message {{ presale_css }}">
+                <div class="shipping-column {% if current_variant.metafields.fulfillment.shipping_by and is_available %} {% else %} hide {% endif %}">
+                  <div class="shipping-msg">{{ current_variant.metafields.accentuate.future_ships_message }}</div>
+                  <p class="shipping-date"> Estimated ship date is <span>{{ shipping_by }}</span></p>
+                </div>
+              </div>
+            {% endform %}
+<!--             </form> -->
+
+          </div>
+
+          <div class="product-single__description rte" itemprop="description">
+            {% comment %}{{ product.description }}{% endcomment %}
+              <div class="tabs-container">
+                <ul class="tabs">
+                  <li class="tab-link current" data-tab="tab-1">{{ settings.product_info_tab_1_label }}</li><!--
+                  --><li class="tab-link" data-tab="tab-2">{{ settings.product_info_tab_2_label }}</li><!--
+                  --><li class="tab-link" data-tab="tab-3">{{ settings.product_info_tab_3_label }}</li>
+                </ul>
+                <div id="tab-1" class="tab-content current">
+                    {{ product.metafields.product_info.field_1_copy }}
+                </div>
+                <div id="tab-2" class="tab-content">
+                    {{ product.metafields.product_info.field_2_copy }}
+                </div>
+                <div id="tab-3" class="tab-content">
+                    {{ product.metafields.product_info.field_3_copy }}
+                </div>
+              </div><!-- .tabs-container -->
+
+          </div>
+
+          {% if section.settings.social_sharing_products %}
+            {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+<br>
+ 
+    {% include 'shop-the-outfit' %}
+
+  </div>
+</div>
+
+
+
+{% unless product.empty == empty %}
+  <script type="application/json" id="ProductJson-{{ section.id }}">
+    {{ product | json }}
+  </script>
+{% endunless %}
+
+<script type="text/javascript">
+  
+  shipping_msg = {
+    {% for variant in product.variants %}
+       {{ variant.id }} : `{{ variant.metafields.accentuate.future_ships_message }}`,
+    {% endfor %}
+  };
+  product_shipping_msg = {
+    "productShipping":`{{ product.metafields.accentuate.future_ships_message }}`
+  }
+  
+  shipping_by = {
+    {% for variant in product.variants %}
+       {{ variant.id }} : `{{ variant.metafields.fulfillment.shipping_by }}`,
+    {% endfor %}
+  };
+  product_shipping_date = {
+    "productShipping":`{{ product.metafields.accentuate.shipping_by }}`
+  }
+  
+</script>
+
+<script type="text/javascript">
+  
+  you_may_like_1 = {
+    {% for variant in product.variants %}
+       {{ variant.id }} : '{{ variant.metafields.you_may_like_1.you_may_like_1 }}',
+    {% endfor %}
+  };
+  
+  you_may_like_1 = {
+    {% for variant in product.variants %}
+       {{ variant.id }} : '{{ variant.metafields.you_may_like_1.you_may_like_1 }}',
+    {% endfor %}
+  };
+  
+  disclamer_disable_color = {
+    23458289: ''
+  }
+  
+  you_may_like_1 = {
+    {% for variant in product.variants %}
+       {{ variant.id }} : '{{ variant.metafields.you_may_like_1.you_may_like_1 }}',
+    {% endfor %}
+  };
+  
+  you_may_like_2 = {
+    {% for variant in product.variants %}
+       {{ variant.id }} : '{{ variant.metafields.you_may_like_2.you_may_like_2 }}',
+    {% endfor %}
+  };
+  
+  you_may_like_3 = {
+    {% for variant in product.variants %}
+    {{ variant.id }} : '{{ variant.metafields.you_may_like_3.you_may_like_3 }}',
+    {% endfor %}
+  };
+
+  image_for_pdp = {
+    {% for prod in collections['all'].products %}
+      {% for variant in prod.variants %}
+        {{ variant.id }} : '{{ variant.metafields.accentuate.image_for_pdp }}',
+      {% endfor %}
+    {% endfor %}
+  }
+  
+  
+  console.log("image_for_pdp list = ", image_for_pdp);
+
+  first_you_may_like_1 = {
+    {%- for option in product.options -%}
+    {% assign option_index = forloop.index0 %}
+    {% capture downcased_option %}{{ option | downcase }}{% endcapture %}
+    {%- if downcased_option contains 'color' or downcased_option contains 'colour' -%}
+    {%- for variant in product.variants -%}
+    {% assign value = variant.options[option_index] %}
+    {%- if wrapped_value contains value %}
+    {% else %}
+    {% assign wrapped_value = wrapped_value | append: ',' | append: value -%}
+    '{{ value | replace:' ','_' }}' : {{ variant.id }},
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endif -%}
+    {%- endfor -%}
+  };
+  
+  
+  default_you_may_like1 = {
+    'default_like1' : '{{ product.metafields.you_may_like_1.you_may_like_1 }}'
+  };
+  default_you_may_like2 = {
+    'default_like2' : '{{ product.metafields.you_may_like_2.you_may_like_2 }}'
+  };
+  default_you_may_like3 = {
+    'default_like3' : '{{ product.metafields.you_may_like_3.you_may_like_3 }}'
+  };
+</script>
+
+<script type="text/javascript">
+
+  // This is also called in theme.js.liquid
+
+  // Get the video urls from the metafields
+  var variant_videos = {};
+  {% assign index = 0 %}
+  {% assign colors0 = colors.size | minus: 1 %}
+  {% for video in product.metafields.product_video %}
+    variant_videos['{{ colors[forloop.index0]}}'] = '{{ video.last }}';
+  {% endfor %}
+
+  // Update the src of the video
+  function updateVideo(current_variant_color){
+    var video = document.getElementById('productVideo');
+    var video_url = variant_videos[current_variant_color];
+    if (video_url) {
+      video.setAttribute('src',video_url);
+      console.log('src', video, video_url);
+      $(video).parent().show();
+    } else {
+      $(video).parent().hide();
+    }
+
+    // Add the data attribute for filtering
+    {% if product.metafields.product_video != blank %}
+    var video_wrapper = document.getElementById('productVideoWrapper');
+    video_wrapper.setAttribute('data-product-color',current_variant_color);
+    {% endif %}
+    // Add the poster image. Needs a timeout for the images to get set
+    setTimeout(function(){
+      var img_src = $('.product-single__photo-wrapper[data-product-color="'+ current_variant_color +'"]').not('.slick-cloned').first().find('.product-single__photo').attr('src');
+      if (video) {
+        video.setAttribute('poster',img_src);
+        video.setAttribute('poster-cache',img_src);
+      }
+    },250);
+
+  };
+
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    
+//     $('[name="id"] option').each(function(){
+//       var isInActive = $(this).attr("data-is-variant-inactive");
+//       if(isInActive == "true"){
+// //         alert();
+//         var variantName = $(this).text();
+//       	var colorName = $.trim(variantName.split(" / ")[0]);
+//         console.log($.trim(colorName));
+//         $('[data-value="'+colorName+'"]').remove();
+//       }
+//     })
+
+    function inActiveVariant(colorCode){
+      $('[name="Size"] label').show()
+      $('[name="id"] option').each(function(){
+        var isInActive = $(this).attr("data-is-variant-inactive");
+        if(isInActive == "true" ){
+          var variantName = $(this).text();
+          var colorName = $.trim(variantName.split(" / ")[0]);
+          var sizeValue = $.trim(variantName.split(" / ")[1]);
+          var sizeWithoutPrice = $.trim(sizeValue.split("-")[0]);
+          if(colorName == colorCode){
+            $('[data-value="'+sizeWithoutPrice+'"]').hide();
+          }
+        }
+      });
+    }
+	
+    // hide inactive color     
+    $(".single-option-radio[name='Color'] label").each(function(){
+      var color = $(this).attr("data-value");
+      var hideClass = true;
+      $("#ProductSelect option").each(function(){
+		var colorName = $(this).attr("data-color-name");
+        var isActive = $(this).attr("data-is-variant-inactive");
+        if(colorName == color && isActive != "true"){
+          hideClass=false;
+        }
+      });
+      if(hideClass){
+      	$(this).hide();
+      }else{
+      	$(this).css("display","inline-block");
+      }
+    });
+    
+    $(".single-option-radio[name='Size'] label").show();
+    
+    //     gray sold out variant
+    function changeSoldOutColor(){
+      var activeColor = $(".single-option-radio[name='Color'] input:checked").val();
+      var sizeLength = $("#ProductSelect-option-1 input").length;
+      $(".single-option-radio[name='Size'] label").removeClass("soldout");
+      var count = 0;
+      $("#ProductSelect option").each(function(){
+		var colorName = $(this).attr("data-color-name");
+        var sizeName = $(this).attr("data-size-name");
+        var isAvailable = $(this).attr("data-available");
+        console.log('test', colorName, sizeName, isAvailable);
+        if(colorName == activeColor && isAvailable != "true"){
+          count += 1;
+          $(".single-option-radio[name='Size']  [data-handle-value="+sizeName+"]").addClass("soldout");
+        }
+      });
+      if(sizeLength == count && window.location.href.indexOf('rise-ai-giftcard') === -1){
+        console.log('sizeLength?', $("#ProductSelect-option-0 input:checked + label"));
+        $("#ProductSelect-option-0 input:checked + label").addClass('soldout');
+      }
+      console.log('changeSoldOutColor:', sizeLength,count);
+    }
+    
+    $(".single-option-radio[name='Color'] input").on("change",function(){
+      $("#ProductSelect-option-0 input+label").removeClass('soldout');
+      changeSoldOutColor();
+    });
+    
+    changeSoldOutColor();
+    
+    $("#AddToCartForm [name='Color'] label").on("click",function(){
+      var colorCode = $(this).attr("data-value");
+      //       alert(colorCode);
+      inActiveVariant(colorCode);
+    });
+
+    var colorCodeNew = $("#AddToCartForm [name='Color'] input[type='radio']:checked+label").attr("data-value");
+    //     alert(colorCodeNew);
+    inActiveVariant(colorCodeNew);
+    
+    var current_variant_color = '{{ current_variant_color }}';
+
+    updateVideo(current_variant_color);
+    
+    // Hide all non current color
+    $('.product-single__photo-wrapper').not('.product-single__video-wrapper').addClass('hidden');
+    // Show current color
+    $('.product-single__photo-wrapper[data-product-color="'+ current_variant_color +'"]').removeClass('hidden');
+
+    // Check for the carousel and filter if present or appears
+    var checkSlickExist = setInterval(function() {
+       if ($('.slick-initialized').length) {
+          console.log('Slick carousel exists');
+          $('.product-single__photo-wrapper').removeClass('hidden');
+          $('.slick-initialized').slickFilter('*');
+          $('.slick-initialized').slickFilter(
+              $('.product-single__photo-wrapper[data-product-color="'+ current_variant_color +'"]')
+            );
+          clearInterval(checkSlickExist);
+       }else{
+          console.log('No carousel');
+       }
+    }, 100); // check every 100ms
+
+    // Stop checking after 5 seconds
+    setTimeout(function(){
+      clearInterval(checkSlickExist);
+    },5000);
+
+    // JS tabs
+    $('ul.tabs li').click(function(){
+      var tab_id = $(this).attr('data-tab');
+
+      $('ul.tabs li').removeClass('current');
+      $('.tab-content').removeClass('current');
+
+      $(this).addClass('current');
+      $("#"+tab_id).addClass('current');
+    });
+
+    // Play video when in viewport
+    var $video = $('#productVideo');
+    function control_video(){
+      if( $(window).width() > 767 ) {
+        // Hide the poster image controls for autoplay
+        if ($video[0]) {
+          $video.attr('poster','');
+          $video.removeAttr('controls');
+          if ( $video.is(':in-viewport') ){
+            $video[0].play();
+          }else{
+            $video[0].pause();
+          }
+        }
+      }
+    }
+    $(window).load( control_video );
+    $(window).scroll( $.throttle( 250, control_video ) );
+
+    // Remove scroll to fixed on smaller screens
+    function remove_fixed(){
+      if( $(window).width() < 769 ){
+        $('.product-single__meta').trigger('detach.ScrollToFixed');
+      }
+    }
+    $(window).resize( $.throttle( 250, remove_fixed ) );
+    $(window).scroll( $.throttle( 250, remove_fixed ) );
+
+    // Remove carousel on wider screens
+    function remove_slick(){
+      if( $(window).width() > 769 ){
+        $('.slick-initialized').unslick();
+      }
+    }
+    $(window).resize( $.throttle( 250, remove_slick ) );
+    $(window).scroll( $.throttle( 250, remove_slick ) );
+
+    // Reload when moving to / from mobile carousel breakpoint
+    var resizeReload_i = 0;
+    function resizeReload() {
+      var windowsize = $(this).width();
+      if (windowsize > 591 && resizeReload_i === 0) {
+          resizeReload_i = 1;
+      } else if (windowsize <= 591 && resizeReload_i == 1) {
+          location.reload();
+          console.log('reload for resize');
+          resizeReload_i = 0;
+      }
+    }
+    $(window).resize( $.throttle( 250, resizeReload ) );
+	
+    
+      var click = 0;
+    
+    $(document).on("click","#pre-order",function() {
+
+      //       	var quantity = $('.ajaxcart__qty .ajaxcart__qty-num').val();
+
+
+      if($('#Quantity').val() == 1 && click == 0){			
+        click += 1;
+      } else {
+        var quantity = Number($('#Quantity').val()) + 1;
+        $('#Quantity').val(quantity);
+      }
+
+      console.log($('#Quantity').val());
+
+    });
+    
+    
+    
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "zoom_enable",
+        "label": "Enable image zoom"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_products",
+        "label": "Enable product sharing",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_vendor_enable",
+        "label": "Show product vendor"
+      },
+	  {
+        "type": "header",
+        "content": "Disclaimers"
+      },
+	  {
+        "type": "richtext",
+        "id": "above_50_text",
+        "label": "50% and above off message text"
+      },
+	  {
+        "type": "color",
+        "id": "above_50_color",
+        "label": "50% and above off message text color"
+      },
+	  {
+        "type": "richtext",
+        "id": "below_50_text",
+        "label": "Below 50% off message text"
+      },
+	  {
+        "type": "color",
+        "id": "below_50_color",
+        "label": "Below 50% off message text color"
+      },
+	  {
+        "type": "richtext",
+        "id": "best_seller_text",
+        "label": "Best seller message text"
+      },
+	  {
+        "type": "color",
+        "id": "best_seller_color",
+        "label": "Best seller text color"
+      }
+    ]
+  }
+{% endschema %}

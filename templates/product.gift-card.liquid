@@ -1,0 +1,24 @@
+<!-- spurit_po-added -->
+{% include 'spurit_po-product-snippet' %}
+<script>
+  var SPOCustom = {};
+  SPOCustom.trackLineItemProperties = true;
+</script>
+<!-- /spurit_po-added -->
+<!-- /templates/product.gift-card.liquid -->
+{% comment %}
+  The contents of the product.gift-card.liquid template can be found in /sections/product-gift-card-template.liquid
+{% endcomment %}
+
+{% section 'product-gift-card-template' %}
+
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // add to cart button, sold out, and unavailable states here.
+  theme.productStrings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }}
+  };
+</script>

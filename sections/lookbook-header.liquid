@@ -1,0 +1,44 @@
+<header id="sectionHeader" class="section-header text-center">
+
+  <img class="mobile lazyload" data-src="{{ section.settings.mobile_banner | img_url:"original" }}" />
+  <div class="description">
+    <div class="inner">
+      {{ collection.description }}
+    </div>
+    <hr class="hr--small">
+  </div>
+  <img  id="desktopShelfHeader" class="desktop lazyload" src="{{ 'lazy.gif' | asset_url }}" data-src="{{ section.settings.desktop_banner | img_url: '2400x' }}" />
+</header>
+{% if section.settings.title %}
+<div class="wrapper lookbook-title">
+  <h2>{{ section.settings.title }}</h2>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Lookbook header",
+    "settings": [
+	  {
+        "type": "image_picker",
+        "id": "desktop_banner",
+        "label": "Lookbook desktop banner"
+      },
+	  {
+        "type": "image_picker",
+        "id": "mobile_banner",
+        "label": "Lookbook Mobile banner"
+      },
+	  {
+        "type": "text",
+        "id": "title",
+        "label": "Title under banner"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

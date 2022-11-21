@@ -1,0 +1,59 @@
+<div class="container-fluid" data-section-id="{{ section.id }}" data-section-type="press-section">
+  <div class="press">
+    <h4>{{ section.settings.press-heading }}</h4>
+    <div class="press-items">
+
+      {% for block in section.blocks %}
+      <a href="{{ block.settings.press-image-link }}">
+        <img data-src="{{ block.settings.press-image | img_url: '300x' }}" alt="{{ block.settings.press-image-alt }}" class="img-responsive lazyload">
+      </a>
+      {% endfor %}
+
+    </div>
+  </div><!-- .press -->
+</div><!-- .container-fluid -->
+
+{% schema %}
+  {
+    "name": "Press Logos",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "press-heading",
+        "label": "Heading",
+        "default": "Don't Take Our Word For It..."
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "slide",
+        "name": "Press",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "press-image",
+            "label": "Logo"
+          },
+          {
+            "type": "url",
+            "id": "press-image-link",
+            "label": "Link"
+          },
+          {
+            "type": "text",
+            "id": "press-image-alt",
+            "label": "Alt Text (optional)"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Press Logos",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}
+

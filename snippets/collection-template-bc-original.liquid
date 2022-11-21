@@ -1,0 +1,245 @@
+{% comment %}
+  Collection template, used on collection.liquid and collection.image.liquid
+{% endcomment %}
+
+<style>
+  @media (min-width: 768px) {
+    .description h1, .description h2, .description h3 {
+      color: {{ collection.metafields.shelf_header_color.desktop_color }};
+      {% if collection.metafields.shelf_header_font.header_font == 'Hoefler' %}
+      font-family: 'hoefler';
+      {% else %}
+      font-family: "Gotham A","Gotham B";
+      {% endif %}
+    }
+
+    .description h1 {
+    {% if collection.metafields.shelf_header_font.header_font == 'Hoefler' %}
+      font-weight: normal;
+    {% else %}
+      font-weight: bold;
+    {% endif %}
+    }
+
+    {% if collection.metafields.shelf_header_align.desktop_align == 'Right' %}
+      .template-collection .section-header .description .inner {
+        float: right;
+      }
+    {% elsif collection.metafields.shelf_header_align.desktop_align == 'Center' %}
+      .template-collection .section-header .description .inner {
+        float: none;
+        margin: 0 auto;
+      }
+    {% else %}
+      .template-collection .section-header .description .inner {
+        float: left;
+      }
+    {% endif %}
+  }
+</style>
+
+{% paginate collection.products by 9999 %}
+
+<header id="sectionHeader" class="section-header text-center">
+
+  <img loading="lazy" class="mobile" src="{{ collection.metafields.shelf_header_image.mobile }}" />
+  <div class="description">
+    <div class="inner">
+      {{ collection.description }}
+    </div>
+    <hr class="hr--small">
+  </div>
+  <img  id="desktopShelfHeader" class="desktop lazyload" data-src="{{ collection.metafields.shelf_header_image.desktop }}" />
+</header>
+
+<div class="wrapper">
+
+  {% comment %}
+  <ul class="collection-breadcumbs">
+  {% for _collection in collections %}
+    <li data-position="{{ _collection.metafields.collection_bcrumb.ordinal }}"
+        {% if _collection.title == collection.title %}
+          class="current"
+        {% endif %}
+      ><a href="{{ _collection.url }}">{{ _collection.title }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+
+  <script type="text/javascript">
+    $(function(){
+      $(".collection-breadcumbs").each(function(){
+        $(this).html($(this).children('li').sort(function(a, b){
+            return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;
+        }));
+      });
+    });
+  </script>
+  {% endcomment %}
+
+  <script type="text/javascript">
+    $(function(){
+      $( "a[href$='{{ collection.title | downcase | strip }}']" ).parent().addClass('current');
+    });
+  </script>
+
+  <ul class="collection-breadcumbs">
+    <li data-position="1"><a href="/collections/all">All</a></li>
+    <li data-position="2"><a href="/collections/tops-tees">Tops &amp; Tees</a></li>
+    <li data-position="3"><a href="/collections/sweaters">Sweaters</a></li>
+    <li data-position="4"><a href="/collections/pants">Pants &amp; Skirts</a></li>
+    <li data-position="5"><a href="/collections/dresses">Dresses &amp; Jumpsuits</a></li>
+    <li data-position="6"><a href="/collections/coats-jackets">Jackets &amp; Coats</a></li> 
+    <li data-position="8"><a href="/collections/sale">Sale</a></li>
+  </ul>
+
+  {% if section.settings.collection_tags_enable %}
+    {% if collection.all_tags.size > 0 %}
+      {% comment %}
+        To provide a 'catch-all' link at the top of the list,
+        check against the collection.handle, product type, and vendor.
+      {% endcomment %}
+      <ul class="tags tags--collection inline-list">
+        <li{% unless current_tags %} class="tag--active"{% endunless %}>
+          {% comment %}
+            Good for /collections/all collection and regular collections
+          {% endcomment %}
+          {% if collection.handle %}
+            <a href="/collections/{{ collection.handle }}">
+              {{ 'collections.general.all_of_collection' | t }}
+            </a>
+
+          {% comment %}
+            Good for automatic type collections
+          {% endcomment %}
+          {% elsif collection.current_type %}
+            <a href="{{ collection.current_type | url_for_type }}">
+              {{ 'collections.general.all_of_collection' | t }}
+            </a>
+
+          {% comment %}
+            Good for automatic vendor collections
+          {% endcomment %}
+          {% elsif collection.current_vendor %}
+            <a href="{{ collection.current_vendor | url_for_vendor }}">
+              {{ 'collections.general.all_of_collection' | t }}
+            </a>
+          {% endif %}
+        </li>
+
+        {% for tag in collection.all_tags %}
+          {% if current_tags contains tag %}
+            <li class="tag--active">
+              {{ tag | link_to_remove_tag: tag }}
+            </li>
+          {% else %}
+            <li>
+              {% comment %}
+                Use link_to_add_tag if you want to allow filtering
+                by multiple tags
+              {% endcomment %}
+              {{ tag | link_to_tag: tag }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endif %}
+
+  {% if section.settings.collection_tags_enable %}
+    <hr class="hr--small hr--clear">
+  {% endif %}
+</header>
+
+{% if false %}
+  <div class="grid grid-collage">
+    {% comment %}
+      Loop through our products in the current collection.
+      See the snippet 'snippets/product-grid-collage.liquid'.
+
+      `is_reverse_row__product`, `three_row_index__product`, `collection_product_count`, and `divisible_by_three__product` are
+      all used by 'snippets/product-grid-collage.liquid'
+    {% endcomment %}
+    {% assign is_reverse_row__product = false %}
+    {% assign three_row_index__product = 0 %}
+    {% assign collection_product_count__product = collection.products.size %}
+    {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
+    {% for product in collection.products %}
+      {% include 'product-grid-collage' %}
+    {% else %}
+
+      {% if shop.products_count == 0 %}
+        {% comment %}
+          Add default products to help with onboarding for collections/all only
+        {% endcomment %}
+        {% include 'onboarding-featured-products' %}
+      {% else %}
+        {% comment %}
+          If collection exists but is empty, display message
+        {% endcomment %}
+        <div class="grid__item text-center">
+          <p>{{ 'collections.general.no_matches' | t }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+{% elsif true %}
+  <div class="grid-uniform grid-collection">
+    {% assign grid_item_width = 'medium--one-half large--one-third' %}
+    {% for product in collection.products %}
+
+      {% for option in product.options_with_values %}
+        {% if option.name contains 'olor' %}
+          {% for value in option.values %}
+            {% capture colors %}{{ colors }}{{ value }}{% unless forloop.last %},{% endunless %}{% endcapture %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+
+      {% assign colors = colors | split: ',' %}
+
+      {% for variant in product.variants  %}
+        {% if variant.metafields.accentuate.show_on_collection == 'true' %}
+          {% include 'variant-grid-item' %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% if collection.handle == 'all' %}
+        {% include 'onboarding-featured-products' %}
+      {% else %}
+        <div class="grid__item text-center">
+          <p>{{ 'collections.general.no_matches' | t }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+</div>
+<!-- /.wrapper -->
+
+{% comment %}
+{% elsif true %}
+  <div class="grid-uniform grid-collection">
+    {% assign grid_item_width = 'medium--one-half large--one-third' %}
+    {% for product in collection.products %}
+      {% include 'product-grid-item' %}
+    {% else %}
+      {% if collection.handle == 'all' %}
+        {% include 'onboarding-featured-products' %}
+      {% else %}
+        <div class="grid__item text-center">
+          <p>{{ 'collections.general.no_matches' | t }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+{% endcomment %}
+
+{% if paginate.pages > 1 %}
+  {% include 'pagination' %}
+{% endif %}
+
+{% endpaginate %}

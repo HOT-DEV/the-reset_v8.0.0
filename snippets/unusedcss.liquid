@@ -1,0 +1,31 @@
+{%- assign dynamic_unused = true -%}
+{%- assign unused_file = '' -%}
+{%- assign un_page_name = '' -%}
+
+{% if template.name =='collection' %}
+    {%- assign un_page_name = 'collection' -%}
+    {%- assign unused_file = 'unused-collection.scss.css' -%}
+{% elsif template.name =='product' %}
+    {%- assign un_page_name = 'product' -%}
+    {%- assign unused_file = 'unused-product.scss.css' -%}
+{% elsif shared_page_id == 'lookbook' %}
+    {%- assign un_page_name = 'lookbook' -%}
+    {%- assign unused_file = 'unused-lookbook.scss.css' -%}
+{% elsif shared_page_id == 'capsule' %}
+    {%- assign un_page_name = 'capsule' -%}
+    {%- assign unused_file = 'unused-capsule.scss.css' -%}
+{% elsif page.url =='/pages/best-sellers' %}
+    {%- assign un_page_name = 'best-sellers' -%}
+    {%- assign unused_file = 'unused-best-sellers.scss.css' -%}
+{% else %}
+    {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+	<link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7247756/7231372/css/fonts.css" />
+{% endif %}
+
+{%- if unused_file !='' -%}
+<style id="page-{{ un_page_name }}">
+    @import url("{{ unused_file | asset_url }}");
+    @import url("{{ 'dynamic.scss.css' | asset_url }}");
+</style>
+{%- endif -%}

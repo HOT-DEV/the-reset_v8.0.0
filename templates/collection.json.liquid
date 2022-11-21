@@ -1,0 +1,11 @@
+{% layout none %} 
+<!-- split -->
+{
+  {%- for product in collection.products  -%}
+  {%- for variant in product.variants -%}
+  "{{ variant.id }}":"{{ variant.metafields.accentuate.show_on_the_sale_collection_on }},{{ variant.metafields.accentuate.make_variant_inactive }}"{%- if forloop.last -%}{% else %},{%- endif -%}
+  {%- endfor -%}
+	{%- if forloop.last -%}{% else %},{%- endif -%}
+  {%- endfor -%}
+}
+<!-- split -->

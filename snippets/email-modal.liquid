@@ -1,0 +1,344 @@
+<div id="mc_embed_signup">
+  <div class="pop_up_data">
+  {% if settings.heading_pop  != blank %}
+  	<h2 id="modal-subscribeLabel" class="on-subscribe-heading fff">{{ settings.heading_pop }}</h2>
+  {% endif %}
+  {% if settings.subheading != blank %}
+  	<div class="subscribe-copy">{{ settings.subheading }}</div>
+  {% endif %}
+  <form autocomplete="off" action="https://thereset.us14.list-manage.com/subscribe/post?u=6ddb37f55f770bce2b8d6e9d9&amp;id=d075c46e3a" method="post" id="mc-embedded-subscribe-form2" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mce-responses" class="clear">
+<!--       <div class="response" id="mce-error-response2" style="display:none"></div>
+      <div class="response" id="mce-success-response2" style="display:none">
+          {% if settings.on_succsess_title  != blank %}
+            <h2 id="modal-subscribeLabel" class="on-subscribe-heading">{{ settings.on_succsess_title }}</h2>
+          {% endif %}
+          {% if settings.on_succsess_text != blank %}
+            <p class="subscribe-copy">{{ settings.on_succsess_text }}</p>
+          {% endif %}
+      </div>  -->
+    </div>
+    <div class="mc-field-group input-group">
+      <p style="font-size:15px;" class="must_be_hidden">{{ settings.email_label }}</p> 
+      <input class="form-control input-lg" type="email" value="" name="EMAIL" id="mce-EMAIL" autocomplete="email-new" placeholder="Enter your email here">
+    </div>
+    <div class="copy_policy must_be_hidden"><p class="subscribe-copy_copy">{{ settings.on_new_text_below }}</p></div>
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6ddb37f55f770bce2b8d6e9d9_d075c46e3a" tabindex="-1" value=""></div>
+    <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe2" class="btn btn-primary btn-block btn-lg">
+    <div class="submit-copy"></div>
+  </form>
+  </div>
+  <div class="success_submitted" style="display:none">
+    <p class="heading_text">{{settings.success_heading}}</p>
+    <p class="desc_text">{{settings.success_description}}</p>
+  </div>
+  <div class="error_exist" style="display:none">
+    <p class="heading_text">{{settings.already_exist}}</p>
+<!--     <p class="desc_text"><span></span> <a href="/account"> Click here to login and update your profile</a></p> -->
+    <p class="desc_text"></p>
+  </div>
+  <div class="error_too_many" style="display:none">
+    <p class="heading_text">{{settings.too_many}}</p>
+    <p class="desc_text"><span></span></p>
+  </div>
+  <div class="error_cannot_be_added" style="display:none">
+    <p class="heading_text">{{settings.can_not}}</p>
+    <p class="desc_text"><span></span></p>
+  </div>
+</div>
+<!-- <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+<script type='text/javascript'>
+  (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='MMERGE3';ftypes[3]='text';fnames[4]='MMERGE4';ftypes[4]='text';fnames[5]='MMERGE5';ftypes[5]='address';fnames[6]='MMERGE6';ftypes[6]='phone';fnames[7]='MMERGE7';ftypes[7]='birthday';fnames[8]='MMERGE8';ftypes[8]='text';fnames[9]='MMERGE9';ftypes[9]='text';fnames[10]='MMERGE10';ftypes[10]='text';fnames[11]='RECIMAGE1';ftypes[11]='imageurl';fnames[12]='RECURL1';ftypes[12]='url';fnames[13]='RECNAME1';ftypes[13]='text';fnames[14]='RECIMAGE2';ftypes[14]='imageurl';fnames[15]='RECURL2';ftypes[15]='url';fnames[16]='RECNAME2';ftypes[16]='text';fnames[17]='RECIMAGE3';ftypes[17]='imageurl';fnames[18]='RECURL3';ftypes[18]='url';fnames[19]='RECNAME3';ftypes[19]='text';fnames[20]='PREVIMAGE';ftypes[20]='imageurl';fnames[21]='PREVURL';ftypes[21]='url';fnames[22]='PREVNAME';ftypes[22]='text';fnames[23]='ABAIMAGE';ftypes[23]='imageurl';fnames[24]='ABAURL';ftypes[24]='url';fnames[25]='ABANAME';ftypes[25]='text';fnames[26]='COMPANY';ftypes[26]='text';fnames[27]='ADDRESS';ftypes[27]='address';fnames[28]='CAMPAIGN';ftypes[28]='text';fnames[29]='MMERGE29';ftypes[29]='text';fnames[30]='ACUITYTYPE';ftypes[30]='text';fnames[31]='ACUITYDATE';ftypes[31]='date';fnames[32]='REF_CODE';ftypes[32]='text';fnames[33]='COUPON';ftypes[33]='text';fnames[34]='PHONE';ftypes[34]='text';fnames[35]='INSTAGRAM';ftypes[35]='text';}(jQuery));var $mcj = jQuery.noConflict(true);
+</script>` -->
+
+{{ 'mailchimp.js' | asset_url | script_tag }}
+<script type='text/javascript'>
+  (function($) {
+    window.fnames = new Array(); 
+    window.ftypes = new Array();
+    fnames[0]='EMAIL';
+    ftypes[0]='email';
+    fnames[1]='FNAME';
+    ftypes[1]='text';
+    fnames[2]='LNAME';
+    ftypes[2]='text';
+    fnames[3]='MMERGE3';
+    ftypes[3]='text';
+    fnames[4]='MMERGE4';
+    ftypes[4]='text';
+    fnames[5]='MMERGE5';
+    ftypes[5]='address';
+    fnames[6]='MMERGE6';
+    ftypes[6]='phone';
+    fnames[7]='MMERGE7';
+    ftypes[7]='birthday';
+    fnames[8]='MMERGE8';
+    ftypes[8]='text';
+    fnames[9]='MMERGE9';
+    ftypes[9]='text';
+    fnames[10]='MMERGE10';
+    ftypes[10]='text';
+  }(jQuery));
+  var $mcj = jQuery.noConflict(true);
+</script>
+
+
+<style>
+  
+  
+ 
+  
+  .on-subscribe-heading p strong{
+  	display:block;
+    font-weight:700;
+    margin-top:15px;
+    
+    
+  }
+  .email-popup button.mfp-close {
+    margin-top: 15px;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    background: #848484;
+    line-height:30px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+}
+  .copy_policy{
+  	margin-top:30px;
+  }
+  
+  .copy_policy p a{
+  	text-decoration: underline;
+    
+  }
+  
+  #mce-error-response{
+  	font-size:14px;
+    color:red;
+    line-height:20px;
+    font-style:itelic;
+    margin-top:5px;
+  }
+
+
+
+  
+  
+  .email-popup {
+    max-width: 420px;
+    height: auto;
+    padding: 40px 30px 20px;
+    margin: 100px auto 0;
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+  }
+  .mfp-email .mfp-content{
+  	   vertical-align: middle;
+    
+  }
+  .on-subscribe-heading {
+  	
+    letter-spacing: 0; 
+    font-size: 2.5rem; 
+    line-height: 1;
+    margin-bottom: 8px;
+    font-weight:300;
+    text-align: center;
+  }
+  #mce-success-response .on-subscribe-heading {
+    margin-bottom: 50px;
+  }
+  .subscribe-copy {
+    font-size: 18px;
+    margin-bottom: 34px;
+    text-align: center;
+  }
+  .btn.btn-primary {
+    width: 100%;
+    background: #282828;
+    margin: 25px auto;
+    padding: 15px 20px 14px;
+    letter-spacing: 0;
+  }
+  .form-control {
+    display: block;
+    width: 100%;
+    height: 36px;
+    padding: 6px 24px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #cccccc;
+    border-radius: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+  .form-control {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    box-shadow: none;
+    color: #000;
+    border-color: #000;
+  }
+  .input-lg {
+    height: 49px;
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 1.3333333;
+    border-radius: 0;
+    font-style: inherit;
+  }
+  #mce-error-response {
+    color: #fd2b2a;
+  }
+  #mce-success-response {
+    padding: 0 30px; 
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+  }
+  .form-error {
+    border-color: #fd2b2a;
+  }
+  .error_exist p.heading_text,.error_too_many p.heading_text,.error_cannot_be_added p.heading_text  {
+    font-size: 18px;
+    margin-bottom: 34px;
+    text-align: center;
+  }
+#EmailModal{
+  	padding: 55px 22px 0;
+  }
+
+  #EmailModal .error_exist, #EmailModal .success_submitted{
+      text-align: center;
+      padding: 40px 0;
+  }
+  #EmailModal .error_exist, #EmailModal .error_too_many{
+      text-align: center;
+      padding: 30px 0;
+  }
+  #EmailModal .error_exist p.desc_text{
+      font-size: 15px;
+        margin-top: 28px;
+  }
+
+  #EmailModal .error_exist .desc_text a{
+      display: block;
+      text-decoration: underline;
+      font-size: 15px;
+  }
+  #EmailModal .btn.btn-primary{
+      background: #000 !important;
+  }
+
+  #EmailModal #mc_embed_signup div.mce_inline_error{
+      background-color: #fff !important;
+      color: #000 !important;
+      font-size: 17px:	
+  }
+  #EmailModal .mce_inline_error span{
+      color: #000;
+      font-weight: 400;
+      display: block;
+      margin-bottom: 18px;
+      font-size: 17px;
+  }
+  #EmailModal .mce_inline_error p{
+      color: #000;
+      font-weight: 400;
+  }
+  #EmailModal .copy_policy{
+        /*display: none;*/
+  }
+
+</style>
+
+<script type="text/javascript">
+  
+  $(function(){
+
+    $('body').on('click', '.open-mailchimp-email', function(e) {
+      e.preventDefault();
+      $.magnificPopup.open({closeBtnInside: true,mainClass: 'mfp-fade mfp-email',items: {src: '#EmailModal'},type: 'inline'});
+    });
+//     $(document).on("click",'#mc-embedded-subscribe',function(e){
+// //       alert();
+// //       e.preventDefault();
+// //       Cookies.set("popup", "valid", {
+// //         expires: 60480000000000000,
+// //         path: "/",
+// //         domain: ".thereset.com"
+// //       });
+//       //$(".mfp-close").trigger('click');
+//     });
+
+    function setEmailCookie(){
+      sessionStorage.setItem('popup', 'valid');
+    }
+
+    function openEmailModal(){
+      if ($('body').hasClass('template-index')) {
+        setTimeout(function(){
+          $.magnificPopup.open({
+            closeBtnInside: true,
+            mainClass: 'mfp-fade mfp-email',
+            items: {
+              src: '#EmailModal'
+            },
+            type: 'inline',
+            callbacks: {
+              close: function() {
+                setEmailCookie()
+              }
+            }
+          });
+        },2000);
+      }
+    }
+
+    // $('.clear-email-cookie').on('click',function(e){
+    //     e.preventDefault();
+    //     clearEmailCookie();
+    //     $(this).html('Cookie Removed');
+    // });
+
+    // Get the current cookie value (if set will = "valid")
+    var popup_cookie = Cookies.get('popup');
+
+    // Get the query portion of the url, if it contains "medium=email"
+    // set the cookie (and don't show the modal)
+    var s = location.search;
+    var regex = /medium=email/;
+    if(regex.test(s)){
+      setEmailCookie();
+    }else{
+      // If the cookie is not set, show the modal and set the cookie
+      var data = sessionStorage.getItem('popup');
+      //       alert(data);
+      if (data != 'valid' ){
+        openEmailModal();
+      }
+    }
+
+  }); 
+</script>
+
+
+

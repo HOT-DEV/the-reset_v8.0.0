@@ -1,0 +1,484 @@
+<style>
+  .header-wrapper {
+    position: relative;
+    z-index: 2;
+  }
+
+  .site-header__logo img {
+    max-width: {{ section.settings.logo_max_width | default: '180' | remove: 'px' | append: 'px' }};
+  }
+
+  .wrapper#sticker {
+    background: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    width: 100% !important;
+    max-width: 100%;
+    padding: 0 50px;
+  }
+  @media (max-width: 1130px) {
+    .wrapper#sticker {
+      padding: 0 15px;
+    }
+  }
+
+  .announcement_bar {
+    width: 100%;
+    padding: 0 15px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .announcement_bar p {
+    margin: 0 0 2rem 0;
+  }
+  .announcement_bar a {
+    text-decoration: underline;
+  }
+  .announcement_bar a:hover {
+    text-decoration: none;
+  }
+  .announcement-bar-visible {
+    padding-bottom: 10px;
+  }
+  .header-top{
+    {% if section.settings.announcement_push_down %}
+    margin:0 -50px;
+    {% endif %}
+    background:rgb(6, 6, 6);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding:{{ section.settings.padding }}px;
+    position:relative;
+  }
+  .header-top p{
+    color:{{ section.settings.announcement_bar_text_color }};
+    margin-bottom: 0;
+  }
+  
+  .header-top.rotating {
+    min-height: 35px;
+    position: relative;
+  }
+  
+  .header-top .bar-message {
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+  .header-top .bar-message.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #new_qab_close{
+    color:{{ section.settings.announcement_bar_text_color }};
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  #new_qab_close:hover{
+    color:{{ section.settings.announcement_bar_text_color }};
+  }
+  @media (max-width: 991px) {
+    .announcement-bar-visible {
+      padding-bottom: 8px;
+    }
+  }
+  @media (max-width: 767px) {
+    .announcement-bar-visible {
+      padding-bottom: 0;
+    }
+    {% if section.settings.announcement_push_down %}
+    .header-top {
+      margin: 0 -15px;
+    }
+    {% endif %}
+    .header-top p,#new_qab_close{
+      font-size:12px;
+    }
+    
+    .header-top .bar-message {
+      width: 80%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .site-header__logo img {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script type="text/javascript">
+  $(function(){
+    var rotationDelay = {{ section.settings.rotate_delay | times: 1000 }};
+    var activeRotation = 1;
+    var headerTopRotaion = setInterval(function() {
+      activeRotation = (activeRotation % 3) + 1;
+      console.log('rotation delay:', rotationDelay);
+      $('.bar-message').removeClass('active');
+      $('.bar-message-' + activeRotation).addClass('active');
+    }, rotationDelay);
+    
+    $('.site-nav--has-dropdown > a').on('click',function(e){
+      e.preventDefault();
+      $(this).removeClass('nav-focus');
+    });
+    $('#new_qab_close').on('click',function(e){
+      $(".header-top").remove();
+    });
+  });
+</script>
+
+{% assign hero_full_height = true %}
+{% capture headerTopPramotion %}
+  {% if section.settings.announcement_bar_enable %}
+    {% if section.settings.announcement_bar_enable and section.settings.announcement_bar_message != empty %}
+      {% if section.settings.rotate_message %}
+
+		{% assign set_height = section.settings.announcement_bar_message1 %}
+        {% assign section_size = section.settings.announcement_bar_message2 | size %}
+        {% assign set_height_size = set_height | size %}
+        {% if section_size > set_height_size %}
+		  {% assign set_height = section.settings.announcement_bar_message2 %}
+        {% endif %}
+        {% assign section_size = section.settings.announcement_bar_message3 | size %}
+        {% assign set_height_size = set_height | size %}
+        {% if section_size > set_height_size %}
+		  {% assign set_height = section.settings.announcement_bar_message3 %}
+        {% endif %}
+
+        <div class="header-top rotating" style="background-color: {{ section.settings.announcement_bar_bg_color }};">
+          <div class="bar-message-1 bar-message active">{{ section.settings.announcement_bar_message1 }}</div>
+          <div class="bar-message-2 bar-message">{{ section.settings.announcement_bar_message2 }}</div>
+          <div class="bar-message-3 bar-message">{{ section.settings.announcement_bar_message3 }}</div>
+          <div class="height-setter" style="width:80%;opacity: 0;visibility:hidden;">{{ set_height }}</div>
+          <a id="new_qab_close" href="#" onclick="qab_close_on_click(event)">X</a>
+        </div>
+      {% else %}
+        <div class="header-top" style="background-color: {{ section.settings.announcement_bar_bg_color }};">
+          {{ section.settings.announcement_bar_message1 }}
+          {{ section.settings.announcement_bar_message2 }}
+          {{ section.settings.announcement_bar_message3 }}
+          <a id="new_qab_close" href="#" onclick="qab_close_on_click(event)">X</a>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endcapture %}
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section" data-template="{{ template.name }}">
+  <div class="header-wrapper{% unless hero_full_height %} header-wrapper--over-hero{% endunless %}">
+    <header class="site-header" role="banner">
+<!--       <div id="qab_placeholder"></div> -->
+      {% if section.settings.announcement_push_down %}
+      {% else %}
+      {{ headerTopPramotion }}
+      {% endif %}
+      <div class="wrapper" id="sticker"> 
+        {% if section.settings.announcement_push_down %}
+        {{ headerTopPramotion }}
+        {% endif %}
+        <div class="grid--full grid--table">
+          <div class="grid__item large--hide one-quarter">
+            <div class="site-nav--mobile">
+              <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer">
+                <span class="icon icon-hamburger" aria-hidden="true"></span>
+                <span class="fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+              </button>
+            </div>            
+          </div>
+          <div class="grid__item large--two-tenths large-down--one-half">
+            {% comment %}
+            Use the uploaded logo from theme settings if enabled.
+            Site name gets precedence with H1 tag on homepage, div on other pages.
+            {% endcomment %}
+            {% if template.name == 'index' %}
+            <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+              {% else %}
+              <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+                {% endif %}
+                {% if section.settings.logo or true%}
+                {% comment %}
+                .logo--has-inverted is only applied to the default logo if the inverted logo exists. That way it'll only be hidden on the slider when it has a backup.
+                {% endcomment %}
+                <a href="/" itemprop="url" class="site-header__logo-link{% if section.settings.logo-inverted %} logo--has-inverted{% endif %}">
+                  {% if section.settings.logo_max_width != empty %}
+                  {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+                  {% else %}
+                  {% assign image_size = "180x" %}
+                  {% endif %}
+                  <img data-src="{{ 'logo.svg' | asset_url }}"
+                       alt="{{ section.settings.logo.alt | default: shop.name }}"
+                       itemprop="logo" class="lazyload">
+                </a>
+                {% if section.settings.logo-inverted %}
+                <a href="/" itemprop="url" class="logo--inverted">
+                  <img data-src="{{ section.settings.logo-inverted | img_url: image_size }}"
+                       srcset="{{ section.settings.logo-inverted | img_url: image_size }} 1x, {{ section.settings.logo-inverted | img_url: image_size, scale: 2 }} 2x"
+                       alt="{{ section.settings.logo-inverted.alt | default: shop.name }}"
+                       itemprop="logo" class="lazyload">
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="/" itemprop="url">{{ shop.name }}</a>
+                {% endif %}
+                {% if template.name == 'index' %}
+                </h1>
+              {% else %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="grid__item large--six-tenths large--text-right medium-down--hide">
+            {% comment %}
+            List out your main-menu linklist (default)
+
+            More info on linklists:
+            - http://docs.shopify.com/themes/liquid-variables/linklists
+            {% endcomment %}
+            <!-- begin site-nav -->
+            <ul class="site-nav" id="AccessibleNav">
+              {% if section.settings.search == "box" %}
+              <li class="site-nav__item site-nav--search__bar medium-down--hide ">
+                {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--header' %}
+              </li>
+              {% endif %}
+
+              <li class="site-nav__item site-nav--compress__menu">
+                <button type="button" class="icon-fallback-text site-nav__link site-nav__link--icon js-drawer-open-left" aria-controls="NavDrawer">
+                  <span class="icon icon-hamburger" aria-hidden="true"></span>
+                  <span class="fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                </button>
+              </li>
+              {% for link in linklists[section.settings.main_menu_link_list].links %}
+              {%- comment %}<locksmith:c5f1>{% endcomment -%}
+              {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[section.settings.main_menu_link_list], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% else %}{% continue %}{% endif -%}
+              {%- comment %}</locksmith:c5f1>{% endcomment -%}
+              {% comment %}
+              Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+              More info on dropdowns:
+              - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+              {% endcomment %}
+              {% assign child_list_handle = link.title | handleize %}
+              {% if linklists[child_list_handle].links != blank %}
+              <li class="site-nav__item site-nav__expanded-item site-nav--has-dropdown{% unless template.name == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%}" aria-haspopup="true">
+                <a href="{{ link.url }}" class="site-nav__link">
+                  {{ link.title | remove: '-Subs' }}
+                  {% comment %}
+                  <span class="icon icon-arrow-down" aria-hidden="true"></span>
+                  {% endcomment %}
+                </a>
+                {% include 'mega-menu' %}
+              </li>
+              {% else %}
+              <li class="site-nav__item site-nav__expanded-item{% unless template.name == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless%}">
+                <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
+              </li>
+              {% endif %}
+              {% endfor %}
+
+            </ul>
+            <!-- //site-nav -->
+          </div>
+          <div class="grid__item large--two-tenths large--text-right medium-down--hide">
+            <ul class="site-nav site-nav__cart-links" id="">
+
+              {% if shop.customer_accounts_enabled %}
+              <li class="site-nav__item site-nav__expanded-item">
+                <a class="site-nav__link site-nav__link--icon" href="/account">
+                  My Account
+                  {% comment %}
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-customer" aria-hidden="true"></span>
+                    <span class="fallback-text">
+                      {% if customer %}
+                      {{ 'layout.customer.account' | t }}
+                      {% else %}
+                      {{ 'layout.customer.log_in' | t }}
+                      {% endif %}
+                    </span>
+                  </span>
+                  {% endcomment %}
+                </a>
+              </li>
+              {% endif %}
+
+              {% if section.settings.search == 'page' or section.settings.search == 'modal' %}
+              {% assign search_modal = true %}
+              {% if section.settings.search == 'page' %}
+              {% assign search_modal = false %}
+              {% endif %}
+              <li class="site-nav__item">
+                <a href="/search" class="site-nav__link site-nav__link--icon{% if search_modal %} js-toggle-search-modal{% endif %}" data-mfp-src="#SearchModal">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-search" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ 'general.search.title' | t }}</span>
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+
+              <li class="site-nav__item">
+                <a href="/cart" class="site-nav__link site-nav__link--icon cart-link js-drawer-open-right" aria-controls="CartDrawer">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-shopping-bag" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                  </span>
+                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="grid__item large--hide one-quarter">
+            <div class="site-nav--mobile text-right">
+              <a href="/cart" class="site-nav__link cart-link js-drawer-open-right" aria-controls="CartDrawer">
+                <span class="icon-fallback-text">
+                  <span class="icon icon-shopping-bag" aria-hidden="true"></span>
+                  <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                </span>
+                <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  </div>
+  <div class="header-wrapper-spacer"></div>
+</div>
+
+{% schema %}
+{
+   "name":"Header",
+   "settings":[
+	  {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+         "type":"checkbox",
+         "id":"announcement_bar_enable",
+         "label":"Enable announcement bar"
+      },
+	  {
+         "type":"checkbox",
+         "id":"announcement_push_down",
+         "label":"Enable Promo Banner pushes down the rest of the page"
+      },
+	  {
+          "type":      "range",
+          "id":        "padding",
+          "min":       0,
+          "max":        50,
+          "step":       1,
+          "unit":       "px",
+          "label":     "Padding",
+          "default":   10
+      },
+	  {
+         "type":"color",
+         "id":"announcement_bar_bg_color",
+         "label":"Announcement Bar Background Color",
+         "default":"#898a88"
+      },
+      {
+         "type":"color",
+         "id":"announcement_bar_text_color",
+         "label":"Announcement Bar Text Color",
+         "default":"#fff"
+      },
+      {
+         "type":"textarea",
+         "id":"announcement_bar_message1",
+         "label":"Announcement Bar Message 1"
+      },
+	  {
+         "type":"textarea",
+         "id":"announcement_bar_message2",
+         "label":"Announcement Bar Message 2"
+      },
+	  {
+         "type":"textarea",
+         "id":"announcement_bar_message3",
+         "label":"Announcement Bar Message3"
+      },
+	  {
+         "type":"checkbox",
+         "id":"rotate_message",
+         "label":"Rotate Messages"
+      },
+	  {
+        "type":"range",
+        "id":"rotate_delay",
+        "label":"Rotation Delay",
+        "min": 1,
+        "max": 10,
+        "step": 0.5,
+        "unit": "sec",
+        "default": 3
+      },
+	  {
+        "type": "header",
+        "content": "Menu list"
+      },
+      {
+         "type":"link_list",
+         "id":"main_menu_link_list",
+         "label":"Menu",
+         "default":"main-menu"
+      },
+      {
+         "type":"image_picker",
+         "id":"logo",
+         "label":"Logo image"
+      },
+      {
+         "type":"image_picker",
+         "id":"logo-inverted",
+         "label":"Inverted logo",
+         "info":"Use a lighter-colored logo when a dark slideshow image is displayed."
+      },
+      {
+         "type":"text",
+         "id":"logo_max_width",
+         "label":"Custom logo width (in pixels)",
+         "default":"180"
+      },
+      {
+         "type":"select",
+         "id":"search",
+         "options":[
+            {
+               "value":"modal",
+               "label":"Modal"
+            },
+            {
+               "value":"page",
+               "label":"Page"
+            },
+            {
+               "value":"box",
+               "label":"Box"
+            },
+            {
+               "value":"none",
+               "label":"None"
+            }
+         ],
+         "label":"Search type"
+      }
+   ]
+}
+{% endschema %}

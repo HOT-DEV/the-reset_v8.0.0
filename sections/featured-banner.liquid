@@ -1,0 +1,59 @@
+{% for block in section.blocks %}
+<section class="shelf-header-feature shelf-header-white shelf-header-no-text">
+  <a href="{{ block.settings.banner-image-link }}">
+    <div class="shelf-header-img">
+      <img data-src="{{ block.settings.banner-desktop-image | img_url: '2000x' }}" alt="{{ block.settings.banner-image-alt }}" class="hidden-xs lazyload" >
+      <img data-src="{{ block.settings.banner-mobile-image | img_url: '767x' }}" alt="{{ block.settings.banner-image-alt }}" class="visible-xs lazyload" >
+    </div><!-- .shelf-header-img -->  
+  </a>
+</section>
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Banners",
+    "settings": [ ],
+    "blocks" : [
+      {
+        "type": "slide",
+        "name": "Banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "banner-desktop-image",
+            "label": "Desktop"
+          },
+          {
+            "type": "image_picker",
+            "id": "banner-mobile-image",
+            "label": "Mobile"
+          },
+          {
+            "type": "url",
+            "id": "banner-image-link",
+            "label": "Link"
+          },
+          {
+            "type": "text",
+            "id": "banner-image-alt",
+            "label": "Alt Text (optional)"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}
+
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

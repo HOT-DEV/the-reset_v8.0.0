@@ -1,0 +1,48 @@
+{% render 'shogun-products', content: product %}
+{% include 'shogun-products', content: product %}
+{{product.metafields.shogun.above}}
+<!-- spurit_po-added -->
+{% include 'spurit_po-product-snippet' %}
+<script>
+  var SPOCustom = {};
+  SPOCustom.trackLineItemProperties = true;
+</script>
+<!-- /spurit_po-added -->
+<!-- /templates/product.liquid -->
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+{% section 'product-template' %}
+
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // add to cart button, sold out, and unavailable states here.
+  theme.productStrings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }}
+  };
+</script>
+
+{{product.metafields.shogun.below}}
+<!--Start Stamped.io Auto Installation--><div id="stamped-main-widget" class="stamped-main-widget" data-widget-style="standard" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}" data-product-sku="{{product.handle}}" data-product-type="{{product.type}}">{{ product.metafields.stamped.reviews }}</div><!--End Stamped.io Auto Installation-->
+
+<script>
+  function addEventListenerStamped(el, eventName, handler) { 
+   if (el.addEventListener) { el.addEventListener(eventName, handler); }
+   else { el.attachEvent('on' + eventName, function () { handler.call(el); }); } 
+}
+
+// Example
+// Listening for reviews widget loaded event
+addEventListenerStamped(document, 'stamped:reviews:loaded', function(e) {
+  jQuery('.stamped-form-review-title').remove();
+ jQuery('#stamped-button-submit').attr("value","Submit Feedback");
+  jQuery('#stamped-main-widget  .stamped-thank-you p:nth-child(2)').html("<p>We appreciate you sharing your feedback with us and the RESET community.</p><p>Xx, Team RESET</p>");
+});
+jQuery('.stamped-form-review-title').remove();
+   jQuery('#stamped-button-submit').attr("value","Submit Feedback");
+    jQuery('#stamped-main-widget  .stamped-thank-you p:nth-child(2)').html("<p>We appreciate you sharing your feedback with us and the RESET community.</p><p>Xx, Team RESET</p>");
+</script>

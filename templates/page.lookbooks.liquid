@@ -1,0 +1,159 @@
+{% render 'shogun-products', content: page %}
+
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'large--one-third medium--one-half' %}
+  {% assign grid_item_four_width = 'large--two-eighths medium--one-half' %}
+{% endunless %}
+
+<div class="template-collection">
+  {% section "lookbook-header" %}
+  <div class="wrapper lookbook-wrapper">
+    {% section "lookbook-three-grid" %}
+    <div class="divider"></div>
+    {% section "lookbook-four-grid" %}
+  </div>
+</div>
+
+<style>
+  .grid-product__wrapper{
+    margin-bottom: 40px;
+  }
+  .grid-description{
+  	display:block;
+    overflow:auto;
+    margin-top: 30px;
+  }
+  /*  description wrapper  */
+  .bottom-wrapper{
+  	position:relative;
+  }
+  .grid-product .lookbook-title{
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 400;
+    display:block;
+    line-height:100%;
+  }
+  .grid-product .lookbook-subtitle{
+    font-size: 13px;
+    font-weight: 400;
+    display:block;
+    padding: 10px 15px 15px;
+  }
+  .readmore { /*  readmore css  */
+    color: gray;
+    border-bottom: 1px solid gray;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    transition: color .2s;
+  }
+  .readmore:hover {
+    color: #000;
+    border-bottom: 1px solid #000;
+    
+  }
+  p.readmore {
+    border: none;
+    margin: 5px 0 0;
+  }
+  p.readmore:hover {
+    color: gray;
+    border: none;
+  }
+  /*  divider css  */
+  .divider {
+    content: '';
+    border-top: 1px solid #aaa;
+    display: block;
+    width: 100%;
+    position: relative;
+    margin-bottom:45px;
+  }
+  .on-lookbook-item button {
+    position: absolute;
+    bottom: 23px;
+    right: 60px;
+    height: 25px;
+    width: 25px;
+    background-image: url(//cdn.shopify.com/s/files/1/1849/9653/t/25/assets/play.png?2521);
+    background-repeat: no-repeat;
+    background-size: auto 25px;
+    opacity: .6;
+  }
+  
+  .on-lookbook-content .on-lookbook-item {
+    float: left;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .on-lookbook-content .on-lookbook-item .on-video {
+    max-width:100%;
+    display: block;
+  }
+  .on-audio {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 20px;
+    height: 20px;
+    display: none;
+    cursor: pointer;
+    filter: brightness(0) invert(1);
+    opacity: .6;
+  }
+  .on-audio-active {
+  	display: block;
+  }
+  .on-lookbook-item button.active {
+    background-image: url({{ 'pause.png' | asset_url }});
+    background-repeat: no-repeat;
+  }
+  .on-lookbook-item button {
+    position: absolute;
+    bottom: 23px;
+    right: 60px;
+    height: 25px;
+    width: 25px;
+    background-image: url({{ 'play.png' | asset_url }});
+    background-repeat: no-repeat;
+    background-size: auto 25px;
+    opacity: .6;
+  }
+  .lookbook-title h2 {
+    text-align: center;
+    margin: 55px 0;
+    font-weight: bold;
+  }
+  .lookbook-title.no_link {
+    margin-top: 30px;
+  }
+  
+  @media only screen and (max-width: 425px){
+    .on-audio {
+      bottom: 10px;
+      right: 10px;
+      width: 15px;
+      height: 15px;
+    }
+    .on-lookbook-item button.active {
+      background-image: url({{ 'pause.png' | asset_url }});
+    }
+    .on-lookbook-item button {
+      bottom: 8px;
+      right: 25px;
+      height: 20px;
+      width: 20px;
+      background-image: url({{ 'play.png' | asset_url }});
+      background-size: auto 20px;
+    }
+    .lookbook-title h2 {
+      margin: 35px 0;
+      font-size: 1.3em;
+    }
+  }
+</style>
+
+
+

@@ -1,0 +1,262 @@
+<div class="grid  text-center clearfix">
+  <div class="product-single__also-like-products">
+    <div class="grid__item grid__item--header"><h3>Shop The Edit </h3></div>
+  </div>
+
+  {% assign selected_handles = product.metafields.you_may_like_1.you_may_like_1 | split: ',' | first %}
+  {% assign product_handle = product.metafields.you_may_like_1.you_may_like_1 | split: ',' %}
+  {% assign color_handle = product_handle[1]  %}
+  {% assign variant_handle = product_handle[1] | append:' / ' | append:product_handle[2]  %}
+
+  {{ selected_handles }}
+  
+  <script>
+    console.log(` {{ selected_handles.length }} `, 'also_product 1 ')
+    console.log(` {{ variant_handle }} `, ' variant_handle ')
+    console.log(` {{ color_handle }} `, ' color_handle ')
+  </script>
+
+  {%- for selected_handle in selected_handles -%}
+  
+  {% assign also_product = all_products[selected_handle] %}
+
+  {% for option in also_product.options_with_values %}
+  {% if option.name contains 'olor' %}
+  {% for value in option.values %}
+  {% capture colors %}{{ colors }}{{ value }}{% unless forloop.last %},{% endunless %}{% endcapture %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}  
+  
+  {% for variant in also_product.variants %}
+  
+  <script>
+    console.log(` {{ variant.id }} `, 'image_for_pdp 1 ')
+  </script>
+  
+  {% if product_handle[2] != blank %}
+  {% if variant.title == variant_handle %}
+  {% assign variant_id = variant.id %}
+  {% assign variant_image = variant.image %}
+  {% assign variant_price = variant.price %}
+  {% endif %}
+  {% else %}
+  {% if variant.title contains product_handle[1] %}
+  {% assign variant_id = variant.id %}
+  {% assign variant_image = variant.image %}
+  {% assign image_for_pdp = variant.metafields.accentuate.image_for_pdp %}
+  {% assign variant_price = variant.price %}
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  {% assign colors = colors | split: ',' %}
+  <!-- qw12 {{selected_handles}}|{{product_handle}} -->
+  <div class="grid__item product-single__also-like-product large--one-third" id="you_may_also_like_1">
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="product-image">
+      {% if image_for_pdp != blank %}
+        <img src="{{ image_for_pdp | img_url: '400x' }}"/>
+      {% elsif variant_image != blank %}
+        <img src="{{ variant_image | img_url: '400x' }}"/>
+      {% else %}
+        <img src="{{ also_product.featured_image | img_url: '400x' }}"/>
+      {% endif %}
+    </a>
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="grid-product__meta">
+      <span class="title grid-product__title">{{ also_product.title }}</span>
+      <span class="price grid-product__price">{% if variant_id != blank %}{{ variant_price | money_without_trailing_zeros }}{% else %}{{ also_product.price | money_without_trailing_zeros }}{% endif %}</span>
+      <span class="grid-product__variant-color">{{ color_handle }}</span>
+      {% if colors.size > 1 %}
+      <span class="grid-product__variant-color-count">Shop more colors</span>
+      {% endif %}
+    </a>
+  </div>
+  {%- else -%}
+  <!-- qw122 {{also_product}} -->
+  <div class="grid__item product-single__also-like-product large--one-third" id="you_may_also_like_1">
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="product-image">
+      {% if image_for_pdp != blank %}
+        <img src="{{ image_for_pdp | img_url: '400x' }}"/>
+      {% elsif variant_image != blank %}
+        <img src="{{ variant_image | img_url: '400x' }}"/>
+      {% else %}
+        <img src="{{ also_product.featured_image | img_url: '400x' }}"/>
+      {% endif %}
+    </a>
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="grid-product__meta">
+      <span class="title grid-product__title">{{ also_product.title }}</span>
+      <span class="price grid-product__price">{% if variant_id != blank %}{{ variant_price | money_without_trailing_zeros }}{% else %}{{ also_product.price | money_without_trailing_zeros }}{% endif %}</span>
+      <span class="grid-product__variant-color">{{ color_handle }} - </span>
+      {% if colors.size > 1 %}
+      <span class="grid-product__variant-color-count">Shop more colors</span>
+      {% endif %}
+    </a>
+  </div>
+  {%- endfor -%}
+
+  {% assign selected_handles = product.metafields.you_may_like_2.you_may_like_2 | split: ',' | first %}
+  {% assign product_handle = product.metafields.you_may_like_2.you_may_like_2 | split: ',' %}
+  {% assign color_handle = product_handle[1]  %}
+  {% assign variant_handle = product_handle[1] | append:' / ' | append:product_handle[2]  %}
+  {%- for selected_handle in selected_handles -%}
+  {% assign also_product = all_products[selected_handle] %}
+
+  {% for option in also_product.options_with_values %}
+  {% if option.name contains 'olor' %}
+  {% for value in option.values %}
+  {% capture colors %}{{ colors }}{{ value }}{% unless forloop.last %},{% endunless %}{% endcapture %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+
+  {% for variant in also_product.variants %}
+
+
+  <script>
+    console.log(` {{ variant.id }} `, 'image_for_pdp 2 ')
+  </script>
+
+  {% if product_handle[2] != blank %}
+  {% if variant.title == variant_handle %}
+  {% assign variant_id = variant.id %}
+  {% assign variant_image2 = variant.image %}
+  {% assign variant_price = variant.price %}
+  {% endif %}
+  {% else %}
+  {% if variant.title contains product_handle[1] %}
+  {% assign variant_id = variant.id %}
+  {% assign variant_image2 = variant.image %}
+  {% assign image_for_pdp2 = variant.metafields.accentuate.image_for_pdp %}
+  {% assign variant_price = variant.price %}
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+
+  {% assign colors = colors | split: ',' %}
+  <div class="grid__item product-single__also-like-product large--one-third" id="you_may_also_like_2">
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="product-image">
+      {% if image_for_pdp2 != blank %}
+      <img src="{{ image_for_pdp2 | img_url: '400x' }}"/>
+      {% elsif variant_image2 != blank %}
+      <img src="{{ variant_image2 | img_url: '400x' }}"/>
+      {% else %}
+      <img src="{{ also_product.featured_image | img_url: '400x' }}"/>
+      {% endif %}
+    </a>
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="grid-product__meta">
+      <span class="title grid-product__title">{{ also_product.title }}</span>
+      <span class="price grid-product__price">{% if variant_id != blank %}{{ variant_price | money_without_trailing_zeros }}{% else %}{{ also_product.price | money_without_trailing_zeros }}{% endif %}</span>
+      <span class="grid-product__variant-color">{{ color_handle }}</span>
+      {% if colors.size > 1 %}
+      <span class="grid-product__variant-color-count">Shop more colors</span>
+      {% endif %}
+    </a>
+  </div>
+  {%- else -%}
+  <div class="grid__item product-single__also-like-product large--one-third" id="you_may_also_like_2">
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="product-image">
+      {% if image_for_pdp2 != blank %}
+      <img src="{{ image_for_pdp2 | img_url: '400x' }}"/>
+      {% elsif variant_image2 != blank %}
+      <img src="{{ variant_image2 | img_url: '400x' }}"/>
+      {% else %}
+      <img src="{{ also_product.featured_image | img_url: '400x' }}"/>
+      {% endif %}
+    </a>
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="grid-product__meta">
+      <span class="title grid-product__title">{{ also_product.title }}</span>
+      <span class="price grid-product__price">{% if variant_id != blank %}{{ variant_price | money_without_trailing_zeros }}{% else %}{{ also_product.price | money_without_trailing_zeros }}{% endif %}</span>
+      <span class="grid-product__variant-color">{{ color_handle }}</span>
+      {% if colors.size > 1 %}
+      <span class="grid-product__variant-color-count">Shop more colors</span>
+      {% endif %}
+    </a>
+  </div>
+  {%- endfor -%}
+
+  {% assign selected_handles = product.metafields.you_may_like_3.you_may_like_3 | split: ',' | first %}
+  {% assign product_handle = product.metafields.you_may_like_3.you_may_like_3 | split: ',' %}
+  {% assign color_handle = product_handle[1]  %}
+  {% assign variant_handle = product_handle[1] | append:' / ' | append:product_handle[2]  %}
+  {%- for selected_handle in selected_handles -%}
+  {% assign also_product = all_products[selected_handle] %}
+
+  {% for option in also_product.options_with_values %}
+  {% if option.name contains 'olor' %}
+  {% for value in option.values %}
+  {% capture colors %}{{ colors }}{{ value }}{% unless forloop.last %},{% endunless %}{% endcapture %}
+  {% endfor %}
+  {% endif %}
+  {% endfor %}
+
+  {% for variant in also_product.variants %}
+
+
+  <script>
+    console.log(` {{ variant.id }} `, 'image_for_pdp 3 ')
+  </script>
+
+  {% if product_handle[2] != blank %}
+  {% if variant.title == variant_handle %}
+  {% assign variant_id = variant.id %}
+  {% assign variant_image3 = variant.image %}
+  {% assign variant_price = variant.price %}
+  {% endif %}
+  {% else %}
+  {% if variant.title contains product_handle[1] %}
+  {% assign variant_id = variant.id %}
+  {% assign variant_image3 = variant.image %}
+  {% assign image_for_pdp3 = variant.metafields.accentuate.image_for_pdp %}
+  {% assign variant_price = variant.price %}
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+
+
+  {% assign colors = colors | split: ',' %}
+  <div class="grid__item product-single__also-like-product large--one-third" id="you_may_also_like_3">
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="product-image">
+      {% if image_for_pdp3 != blank %}
+      <img src="{{ image_for_pdp3 | img_url: '400x' }}"/>
+      {% elsif variant_image3 != blank %}
+      <img src="{{ variant_image3 | img_url: '400x' }}"/>
+      {% else %}
+      <img src="{{ also_product.featured_image | img_url: '400x' }}"/>
+      {% endif %}
+    </a>
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="grid-product__meta">
+      <span class="title grid-product__title">{{ also_product.title }}</span>
+      <span class="price grid-product__price">{% if variant_id != blank %}{{ variant_price | money_without_trailing_zeros }}{% else %}{{ also_product.price | money_without_trailing_zeros }}{% endif %}</span>
+      <span class="grid-product__variant-color">{{ color_handle }}</span>
+      {% if colors.size > 1 %}
+      <span class="grid-product__variant-color-count">Shop more colors</span>
+      {% endif %}
+    </a>
+  </div>
+  {%- else -%}
+  <div class="grid__item product-single__also-like-product large--one-third" id="you_may_also_like_3">
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="product-image">
+      {% if image_for_pdp3 != blank %}
+      <img src="{{ image_for_pdp3 | img_url: '400x' }}"/>
+      {% elsif variant_image3 != blank %}
+      <img src="{{ variant_image3 | img_url: '400x' }}"/>
+      {% else %}
+      <img src="{{ also_product.featured_image | img_url: '400x' }}"/>
+      {% endif %}
+    </a>
+    <a href="{{ also_product.url }}{% if variant_id != blank %}?variant={{ variant_id }}{% endif %}" class="grid-product__meta">
+      <span class="title grid-product__title">{{ also_product.title }}</span>
+      <span class="price grid-product__price">{% if variant_id != blank %}{{ variant_price | money_without_trailing_zeros }}{% else %}{{ also_product.price | money_without_trailing_zeros }}{% endif %}</span>
+      <span class="grid-product__variant-color">{{ color_handle }}</span>
+      {% if colors.size > 1 %}
+      <span class="grid-product__variant-color-count">Shop more colors</span>
+      {% endif %}
+    </a>
+  </div>
+  {%- endfor -%}
+</div>
+
+<script>
+  console.log(`{{ image_for_pdp }}`,'image for pdp 1 = ')
+  console.log(`{{ image_for_pdp2 }}`,'image for pdp 2 = ')
+  console.log(`{{ image_for_pdp3 }}`,'image for pdp 3 = ')
+</script>

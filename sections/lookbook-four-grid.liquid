@@ -1,0 +1,87 @@
+{% unless grid_item_width %}
+  {% assign grid_item_four_width = 'large--two-eighths medium--one-half' %}
+{% endunless %}
+<div class="grid-uniform grid-collection">
+  {% for block in section.blocks %}
+  <div class="grid__item grid-product {{ grid_item_four_width }}">
+    <div class="grid-product__wrapper">
+      <div class="grid-product__image-wrapper">
+        {% if block.settings.button_link != blank %}
+          <a href="{{ block.settings.button_link }}">
+            <img
+                 class="grid-product__image lazyload"
+                 data-src="{{ block.settings.banner | img_url:"original" }}">
+          </a>
+        {% else %}
+          <img
+               class="grid-product__image"
+               data-src="{{ block.settings.banner | img_url:"original" }}">
+        {% endif %}
+      </div>
+      <div class="bottom-wrapper">
+        {% if block.settings.button_link != blank %}
+          <a href="{{ block.settings.button_link }}" class="grid-description">
+            <span class="lookbook-title">{{ block.settings.lookbook_title }}</span>
+            <span class="lookbook-subtitle">{{ block.settings.lookbook_subtitle }}</span>
+          </a>
+          <a href="{{ block.settings.button_link }}" class="readmore">
+            {{ block.settings.button_text }}
+          </a>
+        {% else %}
+          <span class="lookbook-title no_link">{{ block.settings.lookbook_title }}</span>
+          <span class="lookbook-subtitle">{{ block.settings.lookbook_subtitle }}</span>
+          <p class="readmore">
+            {{ block.settings.button_text }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "Lookbook image grid",
+    "settings": [],
+	"blocks" : [
+      {
+        "type": "Image_grid",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "banner",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "lookbook_title",
+            "label": "Lookbook title"
+          },
+          {
+            "type": "text",
+            "id": "lookbook_subtitle",
+            "label": "Lookbook subtitle"
+          },
+		  {
+            "type": "text",
+            "id": "button_text",
+            "label": "Lookbook button text",
+			"default": "Read More"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Lookbook button link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

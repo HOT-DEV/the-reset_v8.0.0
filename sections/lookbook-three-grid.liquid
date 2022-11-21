@@ -1,0 +1,126 @@
+{% unless grid_item_width %}
+{% assign grid_item_width = 'large--one-third medium--one-half' %}
+{% endunless %}
+<div class="grid-uniform grid-collection">
+  {% for block in section.blocks %}
+  <div class="grid__item grid-product {{ grid_item_width }}">
+    <div class="grid-product__wrapper">
+      <div class="grid-product__image-wrapper">
+        <div class="on-lookbook-content">
+          <div class="on-lookbook-item">
+            {% if block.settings.grid_type == 'video' %}
+              {% if block.settings.on_video_url != blank %}
+                <a href="{{ block.settings.button_link }}">
+                  <video class="on-video" autoplay loop muted playsinline >
+                    <source src="{{ block.settings.on_video_url | file_url }}" type="video/mp4">
+                    <source src="{{ block.settings.on_video_url | file_url }}" type="video/ogg">
+                  </video>
+                </a>
+              {% endif %}
+            {% else %}
+              {% if block.settings.button_link != blank %}
+                <a href="{{ block.settings.button_link }}">
+                  <img 
+                       class="grid-product__image lazyload"
+                       data-src="{{ block.settings.image_alt | img_url:"original" }}">
+                </a>
+              {% else %}
+                <img 
+                     class="grid-product__image lazyload"
+                     data-src="{{ block.settings.image_alt | img_url:"original" }}">
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      
+      <div class="bottom-wrapper">
+        {% if block.settings.button_link != blank %}
+          <a href="{{ block.settings.button_link }}" class="grid-description">
+            <span class="lookbook-title">{{ block.settings.lookbook_title }}</span>
+            <span class="lookbook-subtitle">{{ block.settings.lookbook_subtitle }}</span>
+          </a>
+          <a href="{{ block.settings.button_link }}" class="readmore">
+            {{ block.settings.button_text }}
+          </a>
+        {% else %}
+          <span class="lookbook-title no_link">{{ block.settings.lookbook_title }}</span>
+          <span class="lookbook-subtitle">{{ block.settings.lookbook_subtitle }}</span>
+          <p class="readmore">
+            {{ block.settings.button_text }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "Lookbook video/image grid",
+    "settings": [
+	
+	],
+	"blocks" : [
+      {
+        "type": "Video_grid",
+        "name": "Video/Image",
+        "settings": [
+          {
+            "type": "radio",
+            "id": "grid_type",
+            "label": "Grid Item Type",
+			"options": [
+			  {
+                "value": "video",
+                "label": "Video"
+              },
+			  {
+                "value": "image",
+                "label": "Image"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "on_video_url",
+            "label": "Lookbook Video Filename",
+            "info": "Upload file in the Files section of the theme settings and then put the filename in the field above, ex: filename.mp4."
+          },
+          {
+            "type": "image_picker",
+            "id": "image_alt",
+            "label": "Lookbook Image"
+          },
+          {
+            "type": "text",
+            "id": "lookbook_title",
+            "label": "Lookbook title"
+          },
+          {
+            "type": "text",
+            "id": "lookbook_subtitle",
+            "label": "Lookbook subtitle"
+          },
+		  {
+            "type": "text",
+            "id": "button_text",
+            "label": "Lookbook button text",
+			"default": "Read More"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Lookbook button link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

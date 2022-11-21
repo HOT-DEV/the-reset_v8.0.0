@@ -1,0 +1,106 @@
+<!-- /snippets/variant-grid-item.liquid -->
+{% comment %}
+
+  This snippet is used to showcase each product during the loop,
+  'for product in collection.products' in collection.liquid.
+
+  A liquid variable (grid_item_width) is set just before the this
+  snippet is included to change the size of the container.
+  Once the variable is set on a page, all future instances of this
+  snippet will use that width. Overwrite the variable to adjust this.
+
+  Example
+    - assign grid_item_width = 'large--one-quarter medium--one-half'
+
+{% endcomment %}
+
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'large--one-third medium--one-half' %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+{% comment %} Disabled for now {% endcomment %}
+{% assign sold_out = false %}
+
+<div class="grid__item grid-product {{ grid_item_width }}{% if sold_out %} is-sold-out{% endif %}">
+  <div class="grid-product__wrapper">
+    <div class="grid-product__image-wrapper">
+      <a class="grid-product__image-link" href="{{ variant.url | within: collection }}">
+        <img src="{{ 'lazy.gif' | asset_url }}" data-src="{{ variant | img_url: 'grande' }}" alt="{{ variant.featured_image.alt | escape }}" class="grid-product__image lazyload">
+      </a>
+      {% if sold_out %}
+        <div class="grid-product__sold-out">
+          <p>{{ 'products.product.sold_out_html' | t }}</p>
+        </div>
+      {% elsif on_sale %}
+        <div class="grid-product__on-sale">
+          {% capture saved_amount %}{{ product.compare_at_price | minus: product.price | money_without_trailing_zeros }}{% endcapture %}
+          <p>{{ 'products.general.save_html' | t: saved_amount: saved_amount }}</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <a href="{{ product.url | within: collection }}" class="grid-product__meta">
+      <span class="grid-product__title">{{ product.title }}</span>
+      <span class="grid-product__price-wrap">
+        {% comment %}<span class="long-dash">—</span>{% endcomment %}
+        <span class="grid-product__price">
+          {% if on_sale %}
+            <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+          {% else %}
+             <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+          {% endif %}
+          {% comment %}
+            {% if product.price_varies %}
+              {{ product.price_min | money_without_trailing_zeros }}
+            {% else %}
+              {{ product.price | money_without_trailing_zeros }}
+            {% endif %}
+          {% endcomment %}
+          {{ variant.price | money_without_trailing_zeros }}
+          {% if on_sale %}
+            <span class="product-single__price--wrapper">
+              <span id="ComparePrice" class="product-single__price--compare-at">
+                {% if variant.compare_at_price > variant.price %}
+                {{ variant.compare_at_price | money_without_trailing_zeros }}
+                {% endif %}
+              </span>
+            </span>
+          {% endif %}
+        </span>
+      </span>
+      {% if section.settings.product_vendor_enable %}
+        <p class="grid-product__vendor">{{ product.vendor }}</p>
+      {% endif %}
+      <span class="grid-product__variant-color">{{ variant.option1 }}</span>
+      {% assign colorArray = "" %}
+      {% for variant in product.variants %}
+      	{% if variant.metafields.accentuate.make_variant_inactive %} {% else %}
+      	{% if variant.available %}
+      		
+      		{% assign variantTitle = variant.title | split:"/" | first | handle %}
+      		 {% if colorArray contains variantTitle %}
+      		
+             {% else %}
+      			{% assign colorArray = colorArray | append: variantTitle | append:"," %}
+      		 {%  endif %}
+      	{% endif %}
+      	{% endif %}
+      {% endfor %}
+      {% assign CollectionColorSize = colorArray | split:"," | size %}
+      <span class="grid-product__variant-color-count">
+       {{ CollectionColorSize }} color{% if CollectionColorSize > 1 %}s{% endif %} available
+      </span>
+      <br>
+
+    </a>
+  </div>
+</div>

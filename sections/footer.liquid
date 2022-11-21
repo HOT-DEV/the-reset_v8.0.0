@@ -1,0 +1,273 @@
+<footer class="site-footer medium-down--text-center" role="contentinfo">
+  <div class="wrapper">
+
+    <div class="grid text-center">
+      <div class="grid__item grid__item--email-form">
+        <div class="email-form-wrapper email-form">
+        <h5{% if section.settings.footer_h5_styles %} style="{{ section.settings.footer_h5_styles }}"{% endif %}> Sign up to receive 15% off your first order.</h5>
+          <div id="mc_embed_signup">
+            <form autocomplete="off" action="https://thereset.us14.list-manage.com/subscribe/post?u=6ddb37f55f770bce2b8d6e9d9&amp;id=d075c46e3a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div id="mc_embed_signup_scroll">
+                <div class="mc-field-group input-group">
+                  <input type="email" value="" name="EMAIL" class="required email form-control input-lg" id="mce-EMAIL" placeholder="Enter your email here" autocomplete="new-email">
+                  <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-lg">
+                </div>
+                <div id="mce-responses" class="clear">
+                  <div class="response" id="mce-error-response" style="display:none"></div>
+                  <div class="response" id="mce-success-response" style="display:none"></div>
+                </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6ddb37f55f770bce2b8d6e9d9_d075c46e3a" tabindex="-1" value=""></div>
+              </div>
+            </form>
+          </div>
+          
+        </div>
+        <div class="footer-shipping">
+      </div>
+      </div>
+
+      {% comment %}
+        <div class="grid__item grid__item--email-form large--six-tenths push--large--two-tenths">
+          <div class="email-form">
+            <h4>Ready To Reset With Us?</h4>
+            <p>Signup for exclusive access to new items and more.</p>
+            <form data-action="email-signup" class="" action="" method="post">
+              <div data-source="message" class="form-error hide" role="alert">
+                Oops. Please enter a valid email.
+              </div>
+              <div class="input-group">
+                <input class="form-control input-lg " type="email" value="" name="email" placeholder="Enter your email here">
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  <input type="email" name="b_6ddb37f55f770bce2b8d6e9d9_d075c46e3a" tabindex="-1" value="">
+                  <input type="hidden" value="footer" name="signup_location">
+                </div>
+                <span class="input-group-btn">
+                  <input type="submit" name="Sign Up" value="Sign Up" class="btn btn-default btn-lg">
+                </span><!-- .input-group-btn -->
+              </div><!-- .input-group -->
+            </form>
+          </div>
+          <!-- .email-form -->
+        </div>
+      {% endcomment %}
+      
+      
+
+      <div class="grid__item grid__item--hr"><div class="inner"></div></div>
+    </div>
+
+    <div class="grid-uniform">
+
+      {% comment %}
+        Default to 1 footer column (copyright/powered_by/payment_types)
+      {% endcomment %}
+      {% assign num_footer_columns = 1 %}
+
+      {% comment %}
+        Create an extra menu column if link list has more than 5 links
+      {% endcomment %}
+      {% if linklists[section.settings.footer_link_list].links.size > 0 %}
+        {% comment %}
+          We have a Footer menu that isn't empty, we will need another column
+        {% endcomment %}
+        {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+        {% assign extra_footer_linklist_column = false %}
+        {% assign footer_linklist_count = linklists[section.settings.footer_link_list].links.size %}
+        {% if footer_linklist_count > 5 %}
+          {% assign extra_footer_linklist_column = true %}
+          {% comment %}
+            We split the links so we'll need another column
+          {% endcomment %}
+          {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+        {% endif %}
+        {% comment %}
+          If we have an odd amount of links, we need to show 1 more link in 1st column
+        {% endcomment %}
+        {% assign extra_link = footer_linklist_count | modulo: 2 %}
+        {% comment %}
+          We start with a 2nd column after first column is filled up.
+        {% endcomment %}
+        {% assign footer_linklist_split = footer_linklist_count | divided_by: 2 | plus: extra_link | plus: 1 %}
+      {% endif %}
+
+      {% comment %}
+        Determine whether there are social links
+      {% endcomment %}
+      {% assign footer_social_enable = false %}
+      {% if
+        settings.social_twitter_link != blank
+        or settings.social_facebook_link != blank
+        or settings.social_pinterest_link != blank
+        or settings.social_google_plus_link != blank
+        or settings.social_instagram_link != blank
+        or settings.social_tumblr_link != blank
+        or settings.social_youtube_link != blank
+        or settings.social_vimeo_link != blank
+        or settings.social_fancy_link != blank
+        or settings.social_snapchat_link != blank
+      %}
+        {% assign footer_social_enable = true %}
+      {% endif %}
+
+      {% comment %}
+        Calculate the number of footer columns shown. Default to 1.
+      {% endcomment %}
+      {% if footer_social_enable %}
+        {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+      {% endif %}
+
+      {% case num_footer_columns %}
+        {% when 0 %}
+        {% when 1 %}
+          {% assign footer_column_width = '' %}
+        {% when 2 %}
+          {% assign footer_column_width = 'one-half small--one-whole' %}
+        {% when 3 %}
+          {% assign footer_column_width = 'one-third small--one-whole' %}
+        {% when 4 %}
+          {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
+      {% endcase %}
+
+{% comment %}
+  {% if linklists[section.settings.footer_link_list].links.size > 0 %}
+        <div class="grid__item {{ footer_column_width }}">
+          <ul class="no-bullets site-footer__linklist">
+            {%- comment %}<locksmith:642e>{% endcomment -%}
+              {%- assign locksmith_7468_forloop__size = 0 %}{% for link in linklists[section.settings.footer_link_list].links %}{% capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[section.settings.footer_link_list], variable: 'transparent' %}{% endcapture %}{% if var == 'true' %}{% assign locksmith_7468_forloop__size = locksmith_7468_forloop__size | plus: 1 %}{% endif %}{% endfor %}{% assign locksmith_7468_forloop__index = nil -%}
+            {%- comment %}</locksmith:642e>{% endcomment -%}
+            {% for link in linklists[section.settings.footer_link_list].links %}
+
+      {%- comment %}<locksmith:9f12>{% endcomment -%}
+        {%- capture var %}{% render 'locksmith-variables', scope: 'subject', subject: link, subject_parent: linklists[section.settings.footer_link_list], variable: 'transparent' %}{% endcapture %}{% if var == "true" %}{% if locksmith_7468_forloop__index == nil %}{% assign locksmith_7468_forloop__index = 1 %}{% assign locksmith_7468_forloop__index0 = 0 %}{% else %}{% assign locksmith_7468_forloop__index = locksmith_7468_forloop__index | plus: 1 %}{% assign locksmith_7468_forloop__index0 = locksmith_7468_forloop__index0 | plus: 1 %}{% endif %}{% if locksmith_7468_forloop__index == 1 %}{% assign locksmith_7468_forloop__first = true %}{% else %}{% assign locksmith_7468_forloop__first = false %}{% endif %}{% if locksmith_7468_forloop__index == locksmith_7468_forloop__size %}{% assign locksmith_7468_forloop__last = true %}{% else %}{% assign locksmith_7468_forloop__last = false %}{% endif %}{% assign locksmith_7468_forloop__rindex = locksmith_7468_forloop__size | minus: locksmith_7468_forloop__index | minus: 1 %}{% assign locksmith_7468_forloop__rindex0 = locksmith_7468_forloop__size | minus: locksmith_7468_forloop__index0 | minus: 1 %}{% else %}{% continue %}{% endif -%}
+      {%- comment %}</locksmith:9f12>{% endcomment -%}
+
+      {% if extra_footer_linklist_column and locksmith_7468_forloop__index == footer_linklist_split %}
+          </ul>
+        </div>
+        <div class="grid__item {{ footer_column_width }}">
+          <ul class="no-bullets site-footer__linklist">
+      {% endif %}
+
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+{% endcomment %}
+
+      {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
+
+      <div class="grid-uniform">
+      
+        {% case linklists[section.settings.footer_link_list].links.size %}
+          {% when 1 %}
+             {% assign width_class = "large--one-half medium--one-half" %}
+          {% when 2 %}
+             {% assign width_class = "large--one-third medium--one-half" %}
+          {% when 3 %}
+             {% assign width_class = "large--one-quarter medium--one-half" %}
+          {% when 4 %}
+             {% assign width_class = "large--one-fifth medium--one-half" %}
+          {% when 5 %}
+             {% assign width_class = "large--one-sixth medium--one-half" %}
+          {% when 6 %}
+             {% assign width_class = "large--one-eighth medium--one-half" %}
+          {% when 7 %}
+             {% assign width_class = "large--one-eighth medium--one-half" %}
+          {% when 8 %}
+             {% assign width_class = "large--one-tenth medium--one-half" %}
+          {% when 9 %}
+             {% assign width_class = "large--one-tenth medium--one-half" %}
+          {% when 10 %}
+             {% assign width_class = "large--one-twelfth medium--one-half" %}
+          {% when 11 %}
+             {% assign width_class = "large--one-twelfth medium--one-half" %}
+        {% endcase %}
+
+        {% for link in linklists[section.settings.footer_link_list].links %}
+
+          {% if settings.social_column == forloop.index %}
+            {% include 'social-footer-links' %}
+          {% endif %}
+
+          <div class="grid__item {{ width_class }}">
+            <ul class="no-bullets site-footer__linklist">
+              {% for link in link.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          {% if settings.social_column > forloop.index and forloop.last %}
+            {% include 'social-footer-links' %}
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="grid__item grid__item--copyright text-center">
+        <p>&copy; {{ shop.name }} {{ 'now' | date: '%Y' }} All Rights Reserved</p>
+        {% unless shop.enabled_payment_types == empty or true %}
+          {% assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' %}
+          <ul class="inline-list payment-icons">
+            {% for type in shop.enabled_payment_types %}
+              {% if payment_icons_available contains type %}
+                <li>
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-{{ type }}" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ type | replace: '_',' ' }}</span>
+                  </span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endunless %}
+      </div>
+    </div>
+    
+  </div>
+</footer>
+
+<div id="fitGuide" class="fit-guide-popup mfp-hide">
+  {% capture lazygif %}<img src="{{ 'lazy.gif' | asset_url }}" class="lazyload" data-src{% endcapture %}
+  {{ pages.fit-guide-all.content | replace: '<img src', lazygif }}
+</div>
+
+<script type="text/javascript">
+  $(function(){
+
+    // Add a class for mfp to any link for the fit guide
+    $('a[href*="#fit-guide"]').attr('href','#fitGuide').addClass('fit-guide');
+
+    // Set up the popup
+    $('.fit-guide').magnificPopup({
+        closeBtnInside: true,
+        mainClass: 'mfp-fade',
+        items: {
+          src: '#fitGuide'
+        },
+        type: 'inline'
+      });
+
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_link_list",
+        "label": "Footer menu",
+        "default": "footer"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_h5_styles",
+        "label": "Footer Heading Styles",
+        "info": "Add inline CSS styles - format example: font-size: 19px; font-weight: normal;"
+      }
+    ]
+  }
+{% endschema %}

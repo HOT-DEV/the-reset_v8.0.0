@@ -1,0 +1,199 @@
+{% comment %}
+Collection template, used on collection.liquid and collection.image.liquid
+{% endcomment %}
+
+<style>
+  @media (min-width: 768px) {
+    .description h1, .description h2, .description h3 {
+      color: {{ collection.metafields.shelf_header_color.desktop_color }};
+      {% if collection.metafields.shelf_header_font.header_font == 'Hoefler' %}
+      font-family: 'hoefler';
+      {% else %}
+      font-family: "Gotham A","Gotham B";
+      {% endif %}
+    }
+
+    .description h1 {
+      {% if collection.metafields.shelf_header_font.header_font == 'Hoefler' %}
+      font-weight: normal;
+      {% else %}
+      font-weight: bold;
+      {% endif %}
+    }
+
+    {% if collection.metafields.shelf_header_align.desktop_align == 'Right' %}
+    .template-collection .section-header .description .inner {
+      float: right;
+    }
+    {% elsif collection.metafields.shelf_header_align.desktop_align == 'Center' %}
+    .template-collection .section-header .description .inner {
+      float: none;
+      margin: 0 auto;
+    }
+    {% else %}
+    .template-collection .section-header .description .inner {
+      float: left;
+    }
+    {% endif %}
+  }
+</style>
+
+{% assign products_per_page = 50 %}
+{% paginate collection.products by 9999 %}
+<header id="sectionHeader" class="section-header text-center">
+  <img class="mobile lazyload" src="{{ 'lazy.gif' | asset_url }}" data-src="{{ collection.metafields.shelf_header_image.mobile }}" />
+  <noscript><img class="mobile" src="{{ collection.metafields.shelf_header_image.mobile }}" /></noscript>
+  <div class="description">
+    <div class="inner">
+      {{ collection.description }}
+    </div>
+    <hr class="hr--small">
+  </div>
+  <img id="desktopShelfHeader" class="desktop lazyload" src="{{ 'lazy.gif' | asset_url }}" data-src="{{ collection.metafields.shelf_header_image.desktop }}" />
+  <div class="bc-sf-filter-tree-wrapper">
+    <div id="bc-sf-filter-tree-h">
+      {% include 'bc-sf-filter-tree-placeholder-h' %}
+    </div>
+    <div id="bc-sf-filter-tree-mobile">
+      {% include 'bc-sf-filter-skeleton', type: 'button' %}
+    </div>
+    <div id="bc-sf-filter-tree">
+      {% include 'bc-sf-filter-tree-placeholder' %}
+    </div>
+  </div>
+</header>
+
+
+<div class="wrapper">
+  <!--  code to add current class in acitve collection   -->
+  <script type="text/javascript">
+    $(function(){
+      $( "a[href$='{{ collection.title | downcase | strip }}']" ).parent().addClass('current');
+    });
+  </script>
+  
+  <ul class="collection-breadcumbs">
+    <li data-position="1"><a href="/collections/all">All</a></li>
+    <li data-position="3"><a href="/collections/tops-tees">Tops &amp; Tees</a></li>
+    <li data-position="4"><a href="/collections/sweaters">Sweaters &amp; Knits</a></li>
+    <li data-position="5"><a href="/collections/pants">Pants</a></li>
+    <li data-position="6"><a href="/collections/dresses">Dresses</a></li>
+        <li data-position="7"><a href="/collections/coats-jackets">Jackets </a></li> 
+    <li data-position="8"><a href="/collections/Sale">Sale </a></li> 
+ 
+  </ul>
+  
+  {% if section.settings.collection_products_grid == 'collage' %}
+  <div id="bc-sf-filter-products" class="grid grid-collage" data-bc-sort="{{ collection.default_sort_by }}">
+    {% comment %}
+    Loop through our products in the current collection.
+    See the snippet 'snippets/product-grid-collage.liquid'.
+
+    `is_reverse_row__product`, `three_row_index__product`, `collection_product_count`, and `divisible_by_three__product` are
+    all used by 'snippets/product-grid-collage.liquid'
+    {% endcomment %}
+    {% assign is_reverse_row__product = false %}
+    {% assign three_row_index__product = 0 %}
+    {% assign collection_product_count__product = collection.products.size %}
+    {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
+    {% for product in collection.products %}
+    {% include 'product-grid-collage' %}
+    {% endfor %}
+  </div>
+
+  {% elsif section.settings.collection_products_grid == 'grid' %}
+
+  <div id="bc-sf-filter-products" class="grid-uniform" data-bc-sort="{{ collection.default_sort_by }}">
+    {% assign grid_item_width = 'medium--one-half large--one-third' %}
+    {% if collection.handle == "sale" %}
+      {% for product in collection.products %}
+      {% for option in product.options_with_values %}
+      {% if option.name contains 'olor' %}
+      {% for value in option.values %}
+      {% capture colors %}{{ colors }}{{ value }}{% unless forloop.last %},{% endunless %}{% endcapture %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+
+      {% assign colors = colors | split: ',' %}
+
+      {% for variant in product.variants  %}
+      {% if variant.metafields.accentuate.show_on_collection == 'true' and variant.metafields.accentuate.make_variant_inactive != 'true' and variant.metafields.accentuate.hide_on_the_sale_collection_on != 'true' %}
+      {% include 'variant-grid-item' %}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+    
+    {% else %}
+    
+      {% for product in collection.products %}
+      {% for option in product.options_with_values %}
+      {% if option.name contains 'olor' %}
+      {% for value in option.values %}
+      {% capture colors %}{{ colors }}{{ value }}{% unless forloop.last %},{% endunless %}{% endcapture %}
+      {% endfor %}
+      {% endif %}
+      {% endfor %}
+
+      {% assign colors = colors | split: ',' %}
+
+      {% for variant in product.variants  %}
+      {% if variant.metafields.accentuate.show_on_collection == 'true' and variant.metafields.accentuate.make_variant_inactive != 'true' and variant.metafields.accentuate.show_on_the_sale_collection_on != 'true' %}
+      {% include 'variant-grid-item' %}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+
+    {% endif %}
+  </div>
+
+  {% endif %}
+
+  <div id="bc-sf-filter-bottom-pagination">
+    {% include 'pagination' %}
+  </div>
+  <div id="bc-sf-filter-load-more"></div>
+</div>
+{% endpaginate %}
+
+<script>
+  // Declare bcSfFilterConfig variable
+  var bcSfFilterConfig = {
+    label: {
+      sorting: {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Sorting" {% endunless %},
+      sorting_best_selling: {% assign temp = 'collections.sorting.best_selling' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Best Selling" {% endunless %},
+      sorting_featured: {% assign temp = 'collections.sorting.featured' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Featured" {% endunless %},
+      sorting_title_ascending: {% assign temp = 'collections.sorting.az' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Alphabetically, A-Z" {% endunless %},
+      sorting_title_descending: {% assign temp = 'collections.sorting.za' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Alphabetically, Z-A" {% endunless %},
+      sorting_price_ascending: {% assign temp = 'collections.sorting.price_ascending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Lowest Price" {% endunless %},
+      sorting_price_descending: {% assign temp = 'collections.sorting.price_descending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Highest Price" {% endunless %},
+      sorting_date_ascending: {% assign temp = 'collections.sorting.date_ascending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Date, Old to New" {% endunless %},
+      sorting_date_descending: {% assign temp = 'collections.sorting.date_descending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Date, New to Old" {% endunless %},
+      sorting_sale_descending: {% assign temp = 'collections.sorting.sale_descending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "% Off" {% endunless %},
+      sorting_relevance: {% assign temp = 'collections.sorting.relevance' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Relevance" {% endunless %},
+      
+      sold_out: {{ 'products.product.sold_out_html' | t | json }},
+      regular_price: {{ 'products.general.regular_price' | t | json }},
+      sale_price: {{ 'products.general.sale_price' | t | json }},
+      save_price: {{ 'products.general.save_html' | t | json }},
+    },
+    custom: {
+      products_per_page : {% if products_per_page %} {{ products_per_page | json }} {% else %} 24 {% endif %},
+      vendor_enable: {% if settings.product_vendor_enable %} {{ settings.product_vendor_enable | json }} {% else %} false {% endif %},
+      layout: {% if section.settings.collection_products_grid %} {{ section.settings.collection_products_grid | json }} {% else %} "grid" {% endif %},
+      collection_handle:"{{ collection.handle }}"
+    }
+  };
+</script>
+
+{% comment %} start-bc-most-popular-template {% endcomment %}    
+<div class="bc-sf-most-popular-products-wrapper bc-sf-widget-slider-wrapper collection-list">
+  <div class="bc-sf-most-popular-products bc-sf-widget-products owl-carousel"></div>
+</div>        
+{% comment %} end-bc-most-popular-template {% endcomment %}
+
+{% comment %} start-bc-recently-viewed-template {% endcomment %}
+<div class="bc-sf-recent-products-wrapper bc-sf-widget-slider-wrapper collection-list">
+  <div class="bc-sf-recent-products bc-sf-widget-products owl-carousel"></div>
+</div>
+{% comment %} end-bc-recently-viewed-template {% endcomment %}

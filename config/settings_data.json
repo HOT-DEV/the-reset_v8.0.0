@@ -1,0 +1,977 @@
+{
+  "current": {
+    "heading_pop": "<p>RESET WITH US<strong>15% OFF<\/strong><\/p>",
+    "subheading": "Subscribe and receive 15% off\nyour first order.",
+    "email_label": "Email subscription required to receive this offer.",
+    "success_heading": "Thank you for subscribing!",
+    "success_description": "Check your inbox to get your 15% off code.",
+    "already_exist": "You are already subscribed",
+    "too_many": "Too many Requests",
+    "can_not": "Cannot be added",
+    "on_new_text_below": "<p style='font-size:11px;\"'>*By clicking SIGN UP, you agree to receive marketing messages from The Reset. \nView our <a href=\"https:\/\/shop.thereset.com\/pages\/privacy-cookies-policy\">Privacy Policy<\/a> and <a href=\"https:\/\/shop.thereset.com\/pages\/terms-conditions\">Terms of Service<\/a>\n.<\/p>",
+    "color_body_bg": "#ffffff",
+    "color_body_text": "#000000",
+    "color_borders": "#000000",
+    "color_primary": "#282828",
+    "color_secondary": "#000000",
+    "color_product_background": "#ffffff",
+    "color_sale_tag": "#000000",
+    "color_input": "#ffffff",
+    "color_newsletter": "#ffffff",
+    "color_drawer_background": "#ffffff",
+    "color_drawer_text": "#000000",
+    "color_drawer_border": "#555555",
+    "color_drawer_button": "#000000",
+    "color_drawer_button_text": "#ffffff",
+    "type_header_family": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+    "type_header_base_size": "30px",
+    "type_header_border_thickness": "1px",
+    "type_accent_family": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+    "type_accent_transform": true,
+    "type_accent_spacing": true,
+    "type_base_family": "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+    "type_base_size": "16px",
+    "type_base_italize_titles": true,
+    "cart_type": "drawer",
+    "cart_notes_enable": false,
+    "social_column": 3,
+    "social_facebook_link": "https:\/\/www.facebook.com\/theresetsocial",
+    "social_twitter_link": "",
+    "social_pinterest_link": "https:\/\/www.pinterest.com\/theresetsocial\/",
+    "social_instagram_link": "https:\/\/www.instagram.com\/theresetsocial\/",
+    "social_snapchat_link": "",
+    "social_google_plus_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "social_fancy_link": "",
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "favicon": "shopify:\/\/shop_images\/favicon-32x32-1.png",
+    "product_info_tab_1_label": "Description",
+    "product_info_tab_2_label": "Size & Fit",
+    "product_info_tab_3_label": "Details",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/THE_RESET_LOGO_360w.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "small",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Helvetica Neue",
+    "checkout_body_font": "Helvetica Neue",
+    "checkout_accent_color": "#666666",
+    "checkout_button_color": "#000000",
+    "checkout_error_color": "#ff6d6d",
+    "on_new_title": "<center>  <p style='font-size:30px;\"'>Reset With Us<strong>15% OFF <\/strong><\/p>\n<\/center>",
+    "on_new_text": "<center>\n<p style='font-size:18px;\"'>Subscribe and receive 15% off <br> your first order.<\/p>    \n<p style=\"font-size:15px;\">Email subscription required to receive this offer.<\/p>   \n <\/center>",
+    "on_succsess_title": "THANK YOU FOR SIGNING UP!",
+    "on_succsess_text": "Use code <strong>READYTORESET<\/strong> at checkout for 15% off your first purchase.",
+    "checkout_banner_background_color": "#fff",
+    "checkout_call_to_action_color": "#a26b25",
+    "checkout_use_header_image": false,
+    "collection_products_grid": "collage",
+    "collection_sort_enable": false,
+    "collection_tags_enable": true,
+    "customer_layout": "customer_area",
+    "favicon_enable": false,
+    "footer_newsletter_enable": true,
+    "footer_quicklinks_enable": true,
+    "header_search_enable": false,
+    "hero_home_auto": true,
+    "home_featured_collections_sort": "auto",
+    "home_featured_products_grid": "collage",
+    "home_hero_auto_speed": "7000",
+    "product_vendor_enable": false,
+    "product_zoom_enable": true,
+    "social_sharing_style": "clean",
+    "sections": {
+      "slideshow": {
+        "type": "slideshow",
+        "blocks": {
+          "slideshow-0": {
+            "type": "slide",
+            "settings": {
+              "image": "",
+              "slide_text_color": "is-dark",
+              "slide_subheading": "An introductory",
+              "slide_heading": "Hero Banner",
+              "slide_cta": "Shop now",
+              "slide_link": ""
+            }
+          },
+          "slideshow-1": {
+            "type": "slide",
+            "settings": {
+              "image": "",
+              "slide_text_color": "is-dark",
+              "slide_subheading": "An introductory",
+              "slide_heading": "Hero Banner",
+              "slide_cta": "Shop now",
+              "slide_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "slideshow-0",
+          "slideshow-1"
+        ],
+        "settings": {
+          "hero_home_auto": true,
+          "home_hero_auto_speed": "5000"
+        }
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "title": "Featured collection",
+          "home_featured_products": "",
+          "collection_products_grid": "collage"
+        }
+      },
+      "featured-content": {
+        "type": "featured-content",
+        "blocks": {
+          "featured-content-0": {
+            "type": "text",
+            "settings": {
+              "home_page_richtext": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "featured-content-0"
+        ],
+        "settings": {}
+      },
+      "featured-collections": {
+        "type": "featured-collections",
+        "blocks": {
+          "featured-collections-0": {
+            "type": "collection",
+            "settings": {
+              "collection": ""
+            }
+          },
+          "featured-collections-1": {
+            "type": "collection",
+            "settings": {
+              "collection": ""
+            }
+          },
+          "featured-collections-2": {
+            "type": "collection",
+            "settings": {
+              "collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "featured-collections-0",
+          "featured-collections-1",
+          "featured-collections-2"
+        ],
+        "settings": {
+          "title": "Collection list"
+        }
+      },
+      "newsletter": {
+        "type": "newsletter",
+        "settings": {}
+      },
+      "drawer-menu": {
+        "type": "drawer-menu",
+        "settings": {
+          "drawer_top_link_list": "main-menu-2019",
+          "drawer_bottom_link_list": "footer",
+          "drawer_search_enable": false
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "announcement_bar_enable": true,
+          "announcement_push_down": true,
+          "padding": 5,
+          "announcement_bar_bg_color": "#000000",
+          "announcement_bar_text_color": "#ffffff",
+          "announcement_bar_message1": "<p><a href=\"https:\/\/thereset.com\/pages\/whats-new\">Pre-Fall Collection: The Chain Link & Ribbed Collection. Shop Now.\n<\/a><\/p>",
+          "announcement_bar_message2": "<p><a class=\"open-mailchimp-email\">Sign Up for 15% off your first order*<\/a><\/p>",
+          "announcement_bar_message3": "<p><a href=\"\/pages\/shipping\" title=\"Orders & Shipping\">Free Shipping<\/a> & <a href=\"\/pages\/returns-exchanges\" title=\"Returns & Exchanges\">Easy Returns.<\/a><\/p>",
+          "rotate_message": true,
+          "rotate_delay": 5,
+          "main_menu_link_list": "main-menu-2019",
+          "logo_max_width": "180",
+          "search": "none"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_link_list": "new-footer",
+          "footer_h5_styles": "font-size: 24px; font-weight:400"
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "collection_products_grid": "grid",
+          "collection_tags_enable": false,
+          "product_vendor_enable": false
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "zoom_enable": true,
+          "social_sharing_products": true,
+          "product_vendor_enable": false,
+          "above_50_text": "<p><strong>This item is on FINAL SALE.<\/strong><\/p>",
+          "above_50_color": "#f70707",
+          "below_50_text": "<p><strong>This item is eligible for exchange or store credit only<\/strong><\/p>",
+          "below_50_color": "#f70707",
+          "best_seller_text": "<p>BEST SELLER<\/p>",
+          "best_seller_color": "#000000"
+        }
+      },
+      "page-lookbook": {
+        "type": "page-lookbook",
+        "blocks": {
+          "1537564225421": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-individualist-fall-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL_LOOK_BOOK_RD3_FW2018VIDEO22.jpg",
+              "link": "",
+              "on_video_url": "individualist_with_audio.mp4"
+            }
+          },
+          "1537564419227": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-dreamer-fall-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL_LOOK_BOOK_RD3_FW2018VIDEO211.jpg",
+              "link": "",
+              "on_video_url": "THERESET_4_DREAMER_03_small.mp4"
+            }
+          },
+          "1537564472125": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-natural-fall-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL_LOOK_BOOK_RD3_FW2018VIDEO220.jpg",
+              "link": "",
+              "on_video_url": "THERESET_1_NATURAL_05_1.mp4"
+            }
+          },
+          "1537564501688": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-hard-worker-fall-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL_LOOK_BOOK_RD3_FW2018VIDEO228.jpg",
+              "link": "",
+              "on_video_url": "THERESET_3_HARD-WORKER_03_small.mp4"
+            }
+          },
+          "1550246235765": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-realist-spring-19-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/Lookbook_Assest_1028x1413_5bf8f3b3-b434-4a1d-83cf-84046e452e63.jpg",
+              "link": "shopify:\/\/products\/the-modern-jogger",
+              "on_video_url": "Reset_SS19_Capsule_Realist_01.01_4x5_Final_1.mp4"
+            }
+          },
+          "1552947567310": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-optimist-spring-19-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL-LOOK-BOOK-SS19-final10_2.png",
+              "link": "",
+              "on_video_url": "Reset_SS19_Capsule_Optimist_01.01_Final_1.mp4"
+            }
+          },
+          "1554395332343": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-magician-spring-19-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL-LOOK-BOOK-SS19-final26_cropped.png",
+              "link": "",
+              "on_video_url": "Reset_SS19_Capsule_Magician_01.01_Final_1.mp4"
+            }
+          },
+          "1555609856131": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-warrior-spring-19-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/overcame.png",
+              "link": "",
+              "on_video_url": "Reset_SS19_Capsule_Warrior_02.00_Final.mp4"
+            }
+          },
+          "1557341352835": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "the-navigator-spring-19-lookbook",
+              "on_ratio": "half",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/navigaotr_lookbook_quote.png",
+              "link": "",
+              "on_video_url": "Reset_SS19_Capsule_Navigator_01.01_Final_1.mp4"
+            }
+          },
+          "1565985861999": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/side-image.png",
+              "link": "",
+              "on_video_url": "Reset_FW19_CAP1_01.mp4"
+            }
+          },
+          "1566016487259": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "fw19-the-hard-worker",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/VIDEO_BANNER_1.jpg",
+              "link": "",
+              "on_video_url": "Reset_FW19_CAP1_03_FINAL.mp4"
+            }
+          },
+          "1566253920779": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "fw19-the-dreamer",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/VIDEO_BANNERS.jpg",
+              "link": "",
+              "on_video_url": "Reset_FW19_CAP2_02_FINAL.mp4"
+            }
+          },
+          "1566253943476": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "fw19-the-individualist",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/VIDEO-BANNERS2.jpg",
+              "link": "",
+              "on_video_url": "Reset_FW19_CAP3_04_FINAL.mp4"
+            }
+          },
+          "1566253964409": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "fw19-the-natural",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/VIDEO_BANNERS3.jpg",
+              "link": "",
+              "on_video_url": "Reset_FW19_CAP4_02_FINAL.mp4"
+            }
+          },
+          "1582241066790": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "savor-the-plum-1",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/PLUM-DIGITAL-LOOK-BOOK-SS20-edited-for-video.jpg",
+              "link": "",
+              "on_video_url": "15_Capsule_Plum_020620_1_1.mp4?v=1583859249"
+            }
+          },
+          "1582241482395": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "free-with-coastal-blue",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/COASTAL-DIGITAL-LOOK-BOOK-SS208-edited-for-video2.jpg",
+              "link": "",
+              "on_video_url": "15_Capsule_Blue_020620_1.mp4?v=1583859974"
+            }
+          },
+          "1582242002174": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "strength-of-stone",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/STONE-DIGITAL-LOOK-BOOK-SS2014.jpg",
+              "link": "",
+              "on_video_url": "15_Capsule_Stone_020620_1_1.mp4?v=1583860185"
+            }
+          },
+          "1582849013153": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "sangria",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/SANGRIA-DIGITAL-LOOKBOOK-video-croppd.jpg",
+              "link": "",
+              "on_video_url": "15_Capsule_Sangria_012920_1_1.mp4?v=1583955363"
+            }
+          },
+          "1583445941442": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "surprise-of-saffron-loobook",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/SAFFRON-DIGITAL-LOOKBOOK-p1-cropped-for-video-edit.jpg",
+              "link": "",
+              "on_video_url": "15_Capsule_Yellow_012920_1_1_53948b37-9295-4dec-bed7-695e0cd4c831.mp4?v=1583955570"
+            }
+          },
+          "1583953325734": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "journey-with-desert-1",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL_LOOK_BOOK_SS2034_copy_2be80783-32e1-4b84-975b-2b71f5f45a4c.jpg",
+              "link": "http:\/\/DIGITAL_LOOK_BOOK_SS2034_copy_2be80783-32e1-4b84-975b-2b71f5f45a4c.jpg?v=1585076749",
+              "on_video_url": "15_Capsule_Sand_012920_1_1.mp4?v=1583953589"
+            }
+          },
+          "1583954857989": {
+            "type": "Lookbook",
+            "settings": {
+              "on_page": "discover-safari",
+              "on_ratio": "one-third",
+              "on_position": "left",
+              "on_image": "shopify:\/\/shop_images\/DIGITAL_LOOK_BOOK_SS2040_copy_d3a231c7-1721-46b4-bd6d-a4fa32874105.jpg",
+              "link": "http:\/\/DIGITAL_LOOK_BOOK_SS2040_copy_d3a231c7-1721-46b4-bd6d-a4fa32874105.jpg?v=1585076748",
+              "on_video_url": "15_Capsule_Green_012820_1_1.mp4?v=1583954975"
+            }
+          }
+        },
+        "block_order": [
+          "1537564225421",
+          "1537564419227",
+          "1537564472125",
+          "1537564501688",
+          "1550246235765",
+          "1552947567310",
+          "1554395332343",
+          "1555609856131",
+          "1557341352835",
+          "1565985861999",
+          "1566016487259",
+          "1566253920779",
+          "1566253943476",
+          "1566253964409",
+          "1582241066790",
+          "1582241482395",
+          "1582242002174",
+          "1582849013153",
+          "1583445941442",
+          "1583953325734",
+          "1583954857989"
+        ],
+        "settings": {}
+      },
+      "lookbook-header": {
+        "type": "lookbook-header",
+        "settings": {
+          "desktop_banner": "shopify:\/\/shop_images\/Desktop_Banner_Caspule-See_All.jpg",
+          "mobile_banner": "shopify:\/\/shop_images\/Mobile_Banner_Capsule_See_All.jpg",
+          "title": "SPRING CAPSULES"
+        }
+      },
+      "lookbook-three-grid": {
+        "type": "lookbook-three-grid",
+        "blocks": {
+          "1565948457669": {
+            "type": "Video_grid",
+            "settings": {
+              "grid_type": "image",
+              "on_video_url": "",
+              "image_alt": "shopify:\/\/shop_images\/SHOT_1_Bridge_Look1A_082.jpg",
+              "lookbook_title": "CAPSULE ONE",
+              "lookbook_subtitle": "SS22",
+              "button_text": "SHOP NOW",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/shopcapsule1-ss22-grid"
+            }
+          },
+          "1565948490245": {
+            "type": "Video_grid",
+            "settings": {
+              "grid_type": "image",
+              "on_video_url": "",
+              "image_alt": "shopify:\/\/shop_images\/Screen-Shot-2022-03-02-at-10.44.37-AM.jpg",
+              "lookbook_title": "CAPSULE TWO",
+              "lookbook_subtitle": "SS22",
+              "button_text": "SHOP NOW",
+              "button_link": "https:\/\/thereset1.myshopify.com\/pages\/shopcapsule2-ss22-grid"
+            }
+          },
+          "1565948494326": {
+            "type": "Video_grid",
+            "settings": {
+              "grid_type": "image",
+              "on_video_url": "",
+              "image_alt": "shopify:\/\/shop_images\/Screen-Shot-2022-03-02-at-10.45.12-AM.jpg",
+              "lookbook_title": "CAPSULE THREE",
+              "lookbook_subtitle": "SS22",
+              "button_text": "SHOP NOW",
+              "button_link": "https:\/\/thereset1.myshopify.com\/pages\/shopcapsule3-ss22-grid"
+            }
+          },
+          "1581374808081": {
+            "type": "Video_grid",
+            "settings": {
+              "grid_type": "image",
+              "on_video_url": "",
+              "image_alt": "shopify:\/\/shop_images\/Screen-Shot-2022-03-02-at-10.45.30-AM.jpg",
+              "lookbook_title": "CAPSULE FOUR",
+              "lookbook_subtitle": "SS22",
+              "button_text": "SHOP NOW",
+              "button_link": "https:\/\/thereset.com\/pages\/shopcapsule4-ss22-grid"
+            }
+          },
+          "161403ea-ca36-4182-b209-13268eeb85ca": {
+            "type": "Video_grid",
+            "settings": {
+              "grid_type": "image",
+              "on_video_url": "",
+              "image_alt": "shopify:\/\/shop_images\/Screen-Shot-2022-03-02-at-10.45.45-AM_8d9c5ab8-42ae-4e39-99b2-8ee2207d5ed0.jpg",
+              "lookbook_title": "CAPSULE FIVE",
+              "lookbook_subtitle": "SS22",
+              "button_text": "SHOP NOW",
+              "button_link": "https:\/\/thereset.com\/pages\/shopcapsule5-ss22-grid"
+            }
+          },
+          "58192834-c2d3-43fe-bc9c-2e1646ccaeb9": {
+            "type": "Video_grid",
+            "settings": {
+              "grid_type": "image",
+              "on_video_url": "",
+              "image_alt": "shopify:\/\/shop_images\/Screen-Shot-2022-03-02-at-5.06.24-PM.jpg",
+              "lookbook_title": "CAPSULE SIX",
+              "lookbook_subtitle": "SS22",
+              "button_text": "SHOP NOW",
+              "button_link": "https:\/\/thereset.com\/pages\/shopcapsule6-ss22-grid"
+            }
+          }
+        },
+        "block_order": [
+          "1565948457669",
+          "1565948490245",
+          "1565948494326",
+          "1581374808081",
+          "161403ea-ca36-4182-b209-13268eeb85ca",
+          "58192834-c2d3-43fe-bc9c-2e1646ccaeb9"
+        ],
+        "settings": {}
+      },
+      "lookbook-four-grid": {
+        "type": "lookbook-four-grid",
+        "blocks": {
+          "846517ab-3df1-4271-abbc-1e9dc556bd44": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/Capsule1_Look1_172.jpg",
+              "lookbook_title": "CAPSULE ONE",
+              "lookbook_subtitle": "FW21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/shop-capsule-1"
+            }
+          },
+          "81455be4-adac-4ea5-bbbe-41f4dd8b9f38": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/Thumbnail-CAP2.jpg",
+              "lookbook_title": "CAPSULE TWO",
+              "lookbook_subtitle": "FW21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/shop-capsule-2"
+            }
+          },
+          "0fba038c-3070-4029-8934-36366490c853": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/Capsule3_Look4_071.jpg",
+              "lookbook_title": "CAPSUEL THREE",
+              "lookbook_subtitle": "FW21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/shop-capsule-3"
+            }
+          },
+          "fb559826-3a86-4fb1-800e-10fe14419647": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/Capsule4_Look1_101.jpg",
+              "lookbook_title": "CAPSUEL FOUR",
+              "lookbook_subtitle": "FW21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/shop-capsule-4"
+            }
+          },
+          "c3622220-45e1-4f4f-9385-35771ac76d11": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/Lookbook_Thumbnails-5.jpg",
+              "lookbook_title": "CAPSULE FIVE",
+              "lookbook_subtitle": "FW21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/shop-capsule-5"
+            }
+          },
+          "cd051179-d068-43d9-a470-ebea6313a1fc": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/1._CAPSULE1_LOOK01_SWEATER_7150_1000px.jpg",
+              "lookbook_title": "CAPSULE 1 - RISE",
+              "lookbook_subtitle": "SS21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/capsule-1-rise"
+            }
+          },
+          "717611b5-0a74-4dd1-adce-c100b92ec073": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/CAPSULE2_LOOK08_TOP_ECO_11254_copy.jpg",
+              "lookbook_title": "CAPSULE 2 - EXHALE",
+              "lookbook_subtitle": "SS21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/capsule-2-exhale"
+            }
+          },
+          "acb2942e-59d6-49ee-bd84-290c3adc2d8e": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/CAPSULE3_LOOK02_SWEATER_0236_SQ.jpg",
+              "lookbook_title": "CAPSUEL 3 - TRANSCEND",
+              "lookbook_subtitle": "SS21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/capsule-3-transcend"
+            }
+          },
+          "191b958f-0e4d-4369-8a6e-0f9c71dc29a1": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/Thumbnail_CAPSULE4_LOOK04_SWEATER_4031.jpg",
+              "lookbook_title": "CAPSULE 4 - REVIVE",
+              "lookbook_subtitle": "SS21",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/capsule-4-revive"
+            }
+          },
+          "d4f816f0-61ee-46e9-9a71-7df517e9894f": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/6._CAPSULE1_LOOK02_PANT_4209.jpg",
+              "lookbook_title": "CAPSULE 1 - NURTURE",
+              "lookbook_subtitle": "FW20",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "shopify:\/\/pages\/lookbook-nurture"
+            }
+          },
+          "e090de0a-7d10-4941-a616-1780e89a8f1e": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/7._CAPSULE3_LOOK03_COAT_1200.jpg",
+              "lookbook_title": "CAPSULE 2 - ENRICH",
+              "lookbook_subtitle": "FW20",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/lookbook-enrich"
+            }
+          },
+          "a0e23236-c351-4ce5-a1ec-8ba42d649c30": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/8._CAPSULE2_LOOK12_SWEATER_3585.jpg",
+              "lookbook_title": "CAPSULE 3 - EMBRACE",
+              "lookbook_subtitle": "FW20",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/lookbook-embrace"
+            }
+          },
+          "bd2c466a-e26a-4cce-b5d1-03e4c6a20f82": {
+            "type": "Image_grid",
+            "settings": {
+              "banner": "shopify:\/\/shop_images\/9._CAPSULE1_LOOK13_SWEATER_4938.jpg",
+              "lookbook_title": "CAPSULE 4 - REFLECT",
+              "lookbook_subtitle": "FW20",
+              "button_text": "VIEW CAPSULE",
+              "button_link": "https:\/\/shop.thereset.com\/pages\/fw20-reflect-1"
+            }
+          }
+        },
+        "block_order": [
+          "846517ab-3df1-4271-abbc-1e9dc556bd44",
+          "81455be4-adac-4ea5-bbbe-41f4dd8b9f38",
+          "0fba038c-3070-4029-8934-36366490c853",
+          "fb559826-3a86-4fb1-800e-10fe14419647",
+          "c3622220-45e1-4f4f-9385-35771ac76d11",
+          "cd051179-d068-43d9-a470-ebea6313a1fc",
+          "717611b5-0a74-4dd1-adce-c100b92ec073",
+          "acb2942e-59d6-49ee-bd84-290c3adc2d8e",
+          "191b958f-0e4d-4369-8a6e-0f9c71dc29a1",
+          "d4f816f0-61ee-46e9-9a71-7df517e9894f",
+          "e090de0a-7d10-4941-a616-1780e89a8f1e",
+          "a0e23236-c351-4ce5-a1ec-8ba42d649c30",
+          "bd2c466a-e26a-4cce-b5d1-03e4c6a20f82"
+        ],
+        "settings": {}
+      },
+      "product-gift-card-template": {
+        "type": "product-gift-card-template",
+        "settings": {
+          "disclaimer_copy": "",
+          "zoom_enable": false,
+          "social_sharing_products": true,
+          "product_vendor_enable": false
+        }
+      },
+      "1646244307ad4a8ce5": {
+        "type": "featured-press",
+        "blocks": {
+          "2eb745b0-bac2-467e-b4d5-c10c6156cd84": {
+            "type": "slide",
+            "settings": {
+              "press-image": "shopify:\/\/shop_images\/people-300x240.png",
+              "press-image-link": "https:\/\/thereset.com\/pages\/press",
+              "press-image-alt": "People Magazine"
+            }
+          },
+          "a6518702-02c7-4915-91e6-af5091312cd1": {
+            "type": "slide",
+            "settings": {
+              "press-image": "shopify:\/\/shop_images\/o_mag-300x240.png",
+              "press-image-link": "https:\/\/thereset.com\/pages\/press",
+              "press-image-alt": "Oprah Magazine"
+            }
+          },
+          "9ef6f358-a768-4299-902a-dccb92004dfb": {
+            "type": "slide",
+            "settings": {
+              "press-image": "shopify:\/\/shop_images\/instyle-300x240.png",
+              "press-image-link": "https:\/\/thereset.com\/pages\/press",
+              "press-image-alt": "InStyle"
+            }
+          },
+          "ce9ea707-c30b-43cf-9b9a-34daf506427f": {
+            "type": "slide",
+            "settings": {
+              "press-image": "shopify:\/\/shop_images\/today-300x240.png",
+              "press-image-link": "https:\/\/thereset.com\/pages\/press",
+              "press-image-alt": "TODAY"
+            }
+          },
+          "3f8f912c-bac3-4492-9e2a-df49a024229e": {
+            "type": "slide",
+            "settings": {
+              "press-image": "shopify:\/\/shop_images\/wwd-300x240.png",
+              "press-image-link": "https:\/\/thereset.com\/pages\/press",
+              "press-image-alt": "WWD"
+            }
+          }
+        },
+        "block_order": [
+          "2eb745b0-bac2-467e-b4d5-c10c6156cd84",
+          "a6518702-02c7-4915-91e6-af5091312cd1",
+          "9ef6f358-a768-4299-902a-dccb92004dfb",
+          "ce9ea707-c30b-43cf-9b9a-34daf506427f",
+          "3f8f912c-bac3-4492-9e2a-df49a024229e"
+        ],
+        "settings": {
+          "press-heading": "Don't Take Our Word For It..."
+        }
+      },
+      "164624686084b21544": {
+        "type": "featured-banner",
+        "blocks": {
+          "db5fbb0f-0a45-4697-b539-ab73623c7b69": {
+            "type": "slide",
+            "settings": {
+              "banner-desktop-image": "shopify:\/\/shop_images\/SS22_07.24_Refresh_HP_Desktop_BNR_1_1750617e-e6a3-4e78-8a38-dc5da14decdc.jpg",
+              "banner-mobile-image": "shopify:\/\/shop_images\/SS22_07.24_Refresh_HP_Mobile_BNR_1.jpg",
+              "banner-image-link": "https:\/\/thereset.com\/pages\/whats-new",
+              "banner-image-alt": "The Reset - Capsule One"
+            }
+          },
+          "0800fa6c-ee3b-497d-86ef-d7f9f40e7ede": {
+            "type": "slide",
+            "settings": {
+              "banner-desktop-image": "shopify:\/\/shop_images\/SS22_07.24_Refresh_HP_Desktop_BNR_2.jpg",
+              "banner-mobile-image": "shopify:\/\/shop_images\/SS22_07.24_Refresh_HP_Mobile_BNR_2.jpg",
+              "banner-image-link": "https:\/\/thereset.com\/collections\/sweaters",
+              "banner-image-alt": "Essential, Never Basic"
+            }
+          },
+          "cc1f22cc-bdda-48ac-98c6-cc64023f871d": {
+            "type": "slide",
+            "settings": {
+              "banner-desktop-image": "shopify:\/\/shop_images\/SS22_07.24_Refresh_HP_Desktop_BNR_3_a60278ae-46a6-4607-ae2c-296ace619610.jpg",
+              "banner-mobile-image": "shopify:\/\/shop_images\/SS22_07.24_Refresh_HP_Mobile_BNR_3.jpg",
+              "banner-image-link": "https:\/\/thereset.com\/products\/everyday-trouser?variant=39699654737972",
+              "banner-image-alt": "Wardrobe Freedom"
+            }
+          }
+        },
+        "block_order": [
+          "db5fbb0f-0a45-4697-b539-ab73623c7b69",
+          "0800fa6c-ee3b-497d-86ef-d7f9f40e7ede",
+          "cc1f22cc-bdda-48ac-98c6-cc64023f871d"
+        ],
+        "settings": {}
+      }
+    },
+    "content_for_index": [
+      "164624686084b21544",
+      "1646244307ad4a8ce5"
+    ]
+  },
+  "presets": {
+    "Brooklyn": {
+      "cart_type": "drawer",
+      "cart_notes_enable": false,
+      "checkout_accent_color": "#a26b25",
+      "checkout_banner_background_color": "#fff",
+      "checkout_button_color": "#000000",
+      "checkout_call_to_action_color": "#a26b25",
+      "checkout_use_header_image": false,
+      "collection_products_grid": "collage",
+      "collection_sort_enable": false,
+      "collection_tags_enable": true,
+      "color_body_bg": "#ffffff",
+      "color_body_text": "#1c1d1d",
+      "color_borders": "#1c1d1d",
+      "color_drawer_background": "#1c1d1d",
+      "color_drawer_border": "#343535",
+      "color_drawer_button": "#a26b25",
+      "color_drawer_button_text": "#ffffff",
+      "color_drawer_text": "#ffffff",
+      "color_input": "#f6f6f6",
+      "color_newsletter": "#f6f6f6",
+      "color_primary": "#1c1d1d",
+      "color_product_background": "#f7f7f7",
+      "color_sale_tag": "#990000",
+      "color_secondary": "#a26b25",
+      "customer_layout": "customer_area",
+      "favicon_enable": false,
+      "footer_newsletter_enable": true,
+      "footer_quicklinks_enable": true,
+      "header_search_enable": false,
+      "hero_home_auto": true,
+      "home_featured_collections_sort": "auto",
+      "home_featured_products_grid": "collage",
+      "home_hero_auto_speed": "7000",
+      "product_vendor_enable": false,
+      "product_zoom_enable": true,
+      "share_facebook": true,
+      "share_pinterest": true,
+      "share_twitter": true,
+      "social_sharing_style": "clean",
+      "type_accent_family": "Google_Montserrat_400_sans",
+      "type_accent_spacing": true,
+      "type_accent_transform": true,
+      "type_base_family": "Google_Arapey_400_serif",
+      "type_base_italize_titles": true,
+      "type_base_size": "16px",
+      "type_header_base_size": "30px",
+      "type_header_border_thickness": "1px",
+      "type_header_family": "Google_Old+Standard+TT_400_serif",
+      "sections": {
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slideshow-1": {
+              "type": "slide",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "slideshow-1"
+          ],
+          "settings": {}
+        },
+        "featured-products": {
+          "type": "featured-products",
+          "settings": {
+            "home_featured_products": "frontpage"
+          }
+        },
+        "featured-content": {
+          "type": "featured-content",
+          "blocks": {
+            "featured-content-0": {
+              "type": "text",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "featured-content-0"
+          ],
+          "settings": {}
+        },
+        "featured-collections": {
+          "type": "featured-collections",
+          "blocks": {
+            "featured-collections-0": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-2": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "featured-collections-0",
+            "featured-collections-1",
+            "featured-collections-2"
+          ],
+          "settings": {}
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "featured-content",
+        "featured-collections",
+        "featured-products",
+        "newsletter"
+      ]
+    }
+  }
+}
